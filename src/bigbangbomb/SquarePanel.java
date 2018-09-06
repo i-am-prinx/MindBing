@@ -9,7 +9,7 @@ import javax.swing.JPanel;
  */
 
 
-public class SquarePanel extends JPanel {
+public class SquarePanel {
     
     /**
      * this will be used to set the sizes of the panels that will be created,
@@ -23,8 +23,8 @@ public class SquarePanel extends JPanel {
      */
     private JPanel createPanel( ) {
         JPanel panel = new JPanel();
-        setSize(this.squareSize, this.squareSize);
-        setBackground(Color.black);
+        panel.setSize(this.squareSize, this.squareSize);
+        panel.setBackground(Color.black);
         return panel;
     }
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bigbangbomb;
 
 /**
@@ -17,7 +12,7 @@ public class Player {
      * this variable will be used to determine the level of the player and the 
      * amount of grid that will be displayed for that level.
      */
-    private int currentLevel = 1;
+    private static int currentLevel = 1;
     
     
     
@@ -34,9 +29,17 @@ public class Player {
     /**
      * this will increment a player's level by one at each call
      */
-    private void nextLevel( ) {
-        this.currentLevel++;
+    private static void nextLevel( ) {
+        currentLevel++;
     }
     
+    
+    
+    /**
+     * this will help to call nextLevel method outside of this class
+     */
+    public static void callNextLevel( ) {
+        nextLevel();
+    }
     
 }

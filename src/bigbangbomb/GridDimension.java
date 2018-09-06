@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bigbangbomb;
+
+import javax.swing.JPanel;
 
 /**
  *
@@ -43,6 +40,7 @@ public class GridDimension {
     private int col = 2;
     
     
+    
     /**
      * this method will calculate the number of grid that will be displayed.
      * columns and row are to grow simultaneously at each call.
@@ -50,12 +48,14 @@ public class GridDimension {
     private void nextGrid( ) {
         if ( this.row == 2 && this.col == 2 )
         {
-            SquarePanel[][] grid = new SquarePanel[this.row][this.col];
+            JPanel[][] grid = new JPanel[this.row][this.col];
+            this.gridCreatorCalculator(grid);
         } 
         
         else 
         {
-            SquarePanel[][] grid = new SquarePanel[this.row][this.col];
+            JPanel[][] grid = new JPanel[this.row][this.col];
+            this.gridCreatorCalculator(grid);
         }
     }
     
@@ -76,6 +76,26 @@ public class GridDimension {
         {
            // use JOptionPane.showMessageDialog to inform the user that all 
            // levels has been clared, and also display main menu
+        }
+    }
+    
+    
+    
+    /**
+     * this will compute the loop that will create panel based on the current
+     * amount of rows and columns
+     * @param p 
+     */
+    private void gridCreatorCalculator( JPanel[][] p){
+        
+        // The reason for this is so that we can be able to create panel based
+        // on the specification on the SquarePanel class
+        SquarePanel squareCreator = new SquarePanel();
+        
+        for (JPanel[] p1 : p) {
+            for (int gridC = 0; gridC < p1.length; gridC++) {
+                p1[gridC] = squareCreator.callCreatePanel();
+            }
         }
     }
 }
