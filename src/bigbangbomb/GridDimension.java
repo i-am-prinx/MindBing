@@ -45,15 +45,37 @@ public class GridDimension {
     
     /**
      * this method will calculate the number of grid that will be displayed.
-     * columns and row are to grow simultaneously at each call
+     * columns and row are to grow simultaneously at each call.
      */
     private void nextGrid( ) {
+        if ( this.row == 2 && this.col == 2 )
+        {
+            SquarePanel[][] grid = new SquarePanel[this.row][this.col];
+        } 
         
+        else 
+        {
+            SquarePanel[][] grid = new SquarePanel[this.row][this.col];
+        }
     }
     
     
+    
+    
+    /**
+     * this method will call next grid outside of this class
+     */
     public void callNextGrid( ) {
+        if ( this.row != this.MAX_ROW && this.col != this.MAX_COL )
+        {
+            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
+            this.nextGrid();
+        }
         
+        else
+        {
+           // use JOptionPane.showMessageDialog to inform the user that all 
+           // levels has been clared, and also display main menu
+        }
     }
-    
 }
