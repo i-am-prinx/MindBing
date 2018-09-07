@@ -32,18 +32,18 @@ public class SquareFrame extends JFrame{
             for ( int j = fp[i].length-1; j > 0 ; j-- ) {
                if ( j == 1 ){
                     System.out.print("#  \n");
-                    panel.add(fp[i][j], "width 30:50:50, height 30:50:50, wrap");
+                    panel.add(fp[i][j], "width 30:80:80, height 30:80:80, wrap");
                }
                else {
                     System.out.print("#  ");
-                    panel.add(fp[i][j], "width 30:50:50, height 30:50:50");
+                    panel.add(fp[i][j], "width 30:80:80, height 30:80:80");
                 } 
             }
         }
         
         add(panel);
         setVisible(true);
-        setSize(150, 150);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     

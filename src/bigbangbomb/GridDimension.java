@@ -100,12 +100,12 @@ public class GridDimension {
         
         // The reason for this is so that we can be able to create panel based
         // on the specification on the SquarePanel class
-        SquarePanel squareCreator = new SquarePanel();
+        
         
         for (int r = 0; r < p.length; r++ ) {
             for (int c = p[r].length - 1; c >= 0; c-- ) {
                 System.out.println("4\tcalling createPanel");
-                p[r][c] = squareCreator.callCreatePanel();
+                p[r][c] = new SquarePanel();
             }
         }
         System.out.println("6\treturn grid after calculation");
