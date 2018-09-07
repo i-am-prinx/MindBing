@@ -1,6 +1,7 @@
 package bigbangbomb;
 
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 /**
@@ -15,7 +16,7 @@ public class SquarePanel {
      * this will be used to set the sizes of the panels that will be created,
      * which is better-off than hard coding the literals.
      */
-    private final int squareSize = 50;
+    private final int squareSize = 100;
     
     
     /**
@@ -23,8 +24,9 @@ public class SquarePanel {
      */
     private JPanel createPanel( ) {
         JPanel panel = new JPanel();
-        panel.setSize(this.squareSize, this.squareSize);
+        panel.setBorder(BorderFactory.createLineBorder(Color.white));
         panel.setBackground(Color.black);
+        System.out.println("5\tcreateNextpanel Called and Panel is returned");
         return panel;
     }
     

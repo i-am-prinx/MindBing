@@ -20,8 +20,8 @@ public class Player {
      * this will help to return the current level of a player
      * @return integer
      */
-    public int getCurrentLevel() {
-        return this.currentLevel;
+    public static int getCurrentLevel() {
+        return currentLevel;
     }
     
     

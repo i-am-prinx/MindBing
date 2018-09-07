@@ -37,7 +37,7 @@ public class GridDimension {
      * whenever they are called. their values cannot be greater than their max
      */
     private int row = 2;
-    private int col = 2;
+    private int col = 10;
     
     
     
@@ -45,17 +45,24 @@ public class GridDimension {
      * this method will calculate the number of grid that will be displayed.
      * columns and row are to grow simultaneously at each call.
      */
-    private void nextGrid( ) {
+    private JPanel[][] nextGrid( ) {
+        System.out.println("3\tnextGrid Called");
         if ( this.row == 2 && this.col == 2 )
         {
             JPanel[][] grid = new JPanel[this.row][this.col];
-            this.gridCreatorCalculator(grid);
+            grid = this.gridCreatorCalculator(grid);
+            System.out.println("7\ttested rows and columns when they have 2");
+            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
+            return grid;
         } 
         
         else 
         {
             JPanel[][] grid = new JPanel[this.row][this.col];
-            this.gridCreatorCalculator(grid);
+            grid = this.gridCreatorCalculator(grid);
+            System.out.println("8\ttested rows and columns when they have more than 2");
+            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
+            return grid;
         }
     }
     
@@ -63,19 +70,21 @@ public class GridDimension {
     
     
     /**
-     * this method will call next grid outside of this class
+     * this method will call nextGrid outside of this class and return grid
      */
-    public void callNextGrid( ) {
-        if ( this.row != this.MAX_ROW && this.col != this.MAX_COL )
+    public JPanel[][] callNextGrid( ) {
+        System.out.println("1\tinside of callNextGrid");
+        if ( this.row <= this.MAX_ROW && this.col <= this.MAX_COL )
         {
-            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
-            this.nextGrid();
+            System.out.println("2\ttested rows and columns are lower than max");
+            return this.nextGrid();
         }
         
         else
         {
            // use JOptionPane.showMessageDialog to inform the user that all 
            // levels has been clared, and also display main menu
+            return null;
         }
     }
     
@@ -83,19 +92,23 @@ public class GridDimension {
     
     /**
      * this will compute the loop that will create panel based on the current
-     * amount of rows and columns
+     * amount of rows and columns and then return the computation
      * @param p 
+     * @return JPanel
      */
-    private void gridCreatorCalculator( JPanel[][] p){
+    private JPanel[][] gridCreatorCalculator( JPanel[][] p ){
         
         // The reason for this is so that we can be able to create panel based
         // on the specification on the SquarePanel class
         SquarePanel squareCreator = new SquarePanel();
         
-        for (JPanel[] p1 : p) {
-            for (int gridC = 0; gridC < p1.length; gridC++) {
-                p1[gridC] = squareCreator.callCreatePanel();
+        for (int r = 0; r < p.length; r++ ) {
+            for (int c = p[r].length - 1; c >= 0; c-- ) {
+                System.out.println("4\tcalling createPanel");
+                p[r][c] = squareCreator.callCreatePanel();
             }
         }
+        System.out.println("6\treturn grid after calculation");
+        return p;
     }
 }
