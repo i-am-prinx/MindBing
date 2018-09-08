@@ -41,9 +41,16 @@ public class SquareFrame extends JFrame{
             }
         }
         
+        // for setting height and with of frame
+        int MAX_HEIGHT = panel.getHeight();
+        int MAX_WIDTH = panel.getWidth();
+        
+        
         add(panel);
         setVisible(true);
-        setSize(400, 400);
+        setSize(MAX_WIDTH, MAX_HEIGHT);
+        pack();
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
