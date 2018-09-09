@@ -93,6 +93,31 @@ public class SquarePanel extends JPanel implements MouseListener {
                }
            }
         }
+        
+        
+        /**
+         * algorithm to check for surrounding squares around where a user 
+         * performs a click event
+         *
+         * this algorithm cannot be complete unless we get the full width and
+         * height of container holding all squares
+         * 
+         *  --- get full width of container holding all squares
+         * 
+         *  --- get the current location where click event occur ( x & y  position )
+         *      
+         * 
+         * 
+         */
+        
+        int fullWidth = SquareFrame.getFullWidthOfContainer();
+        int fullHeight = SquareFrame.getFullHeightOfContainer();
+        
+        int currentXpos = (int) e.getLocationOnScreen().getX();
+        int currentYpos = (int) e.getLocationOnScreen().getY();
+        
+        
+        
     }
 
     @Override

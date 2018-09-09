@@ -18,6 +18,7 @@ import net.miginfocom.swing.MigLayout;
  * frame that displays the grid system.
  */
 public class SquareFrame extends JFrame{
+    private static JPanel panel = new JPanel();
     
     SquareFrame( ) {
         super();       
@@ -25,7 +26,6 @@ public class SquareFrame extends JFrame{
         
         JPanel[][] fp = new GridDimension().callNextGrid();
         
-        JPanel panel = new JPanel();
         panel.setLayout(new MigLayout());
         
         for ( int i = 0 ; i < fp.length; i++) {
@@ -53,6 +53,31 @@ public class SquareFrame extends JFrame{
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
+    
+    
+    
+    /**
+     * this will return the full width of container holding squares
+     * @return integer
+     */
+    public static int getFullWidthOfContainer( ){
+        return panel.getWidth();
+    }
+    
+    
+    
+    /**
+     * this will return the full height of container holding squares
+     * @return integer
+     */
+    public static int getFullHeightOfContainer( ){
+        return panel.getHeight();
+    }
+    
+    
+    
+    
     
     /*** this main method will be removed from this file, it's just for testing
      * if the grid system is working as expected...
