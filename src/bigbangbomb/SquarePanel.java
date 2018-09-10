@@ -16,7 +16,8 @@ import javax.swing.JLabel;
 
 public class SquarePanel extends JPanel implements MouseListener {
     private boolean flag = false;
-    
+    private JPanel squareContainer = SquareFrame.squareContainer();
+     
     SquarePanel() {
         super();
         this.addMouseListener(this);
@@ -104,19 +105,106 @@ public class SquarePanel extends JPanel implements MouseListener {
          * 
          *  --- get full width of container holding all squares
          * 
-         *  --- get the current location where click event occur ( x & y  position )
-         *      
-         * 
-         * 
+         *  --- get the current location where click event occur ( x & y  position ) 
          */
         
-        int fullWidth = SquareFrame.getFullWidthOfContainer();
-        int fullHeight = SquareFrame.getFullHeightOfContainer();
+        int squareContainerFullWidth = squareContainer.getWidth();
+        int squareContainerFullHeight = squareContainer.getHeight() + 4 ;
+        
         
         int currentXpos = (int) e.getLocationOnScreen().getX();
         int currentYpos = (int) e.getLocationOnScreen().getY();
         
         
+        System.out.println("currentXclickPosition -- " + currentXpos);
+        System.out.println("currentYclickPosition -- " + currentYpos);
+        
+        
+        /**
+         * it should be noted that since all squares displayed have same height
+         * and width. If the previous statement is true, then the spaces between
+         * all squares are same. 
+         * 
+         *  -- The top-left square ( x position begins at = 10 and x position 
+         *     for that same square ends at = 89 ) && ( y position begins at = 33
+         *     and y position for that same square ends at = 112 ),
+         * 
+         * -- The space between the first square at the top-left and the second
+         *    square at the top-left is same amongst all squares which is 
+         *    ( 5 spaces between squares )
+         * 
+         * -- The spaces that makes up a square is 79 spaces amongst all square
+         *      ~ for the first square at the top-left position
+         *          spaceThatMakesUpSquares = squareEnd - squareBegin
+         *          spaceThatMakesUpSquares = 89 - 10
+         *                                  = 79
+         * 
+         *      ~ The space between the every squares is 5 spaces this also 
+         *        should also be added to spaceThatMakesUpSquares
+         *          spaceThatMakesUpSquares = spaceThatMakesUpSquares + 5
+         *                                  = 84
+         * 
+         *      ~ Now it can be said that between first square and second square
+         *        the difference is 84
+         * 
+         * NOTE NOTE NOTE ::: We've just calculated for the X position, note that
+         * same is true for Y position.
+         * 
+         * This formula will remain true if the width of squares
+         * is not tempered or altered. This Formula is true for all squares 
+         * displayed, since they all have equal width and height
+         */
+        
+        
+        int squareSpaces = 84;
+        int nextSquarePos = currentXpos;
+        int prevSquarePos = squareSpaces;
+        
+        
+        while( true ){
+            System.out.println("loop");
+            if ( currentXpos <= squareContainerFullWidth && currentXpos >= 10 ){
+                nextSquarePos += squareSpaces;
+                
+                // algorithm for getting the square before the current square
+                // that a click event is occuring on ( square to the west of click )
+                
+                if ( currentXpos - squareSpaces > squareSpaces ){
+                    prevSquarePos = currentXpos - squareSpaces;
+                    System.out.println("west : " + prevSquarePos );
+                }
+                // end
+                
+                
+                // algorithm for getting the square after the current square that
+                // a click event is occuring on ( square to east of click )
+                
+                if ( currentXpos < nextSquarePos ){
+                    if ( nextSquarePos - currentXpos < squareSpaces ){
+                        nextSquarePos += ( currentXpos + squareSpaces );
+                    }
+                    
+                    if ( nextSquarePos >= squareContainerFullWidth ){
+                        nextSquarePos = squareContainerFullWidth - 15;
+                    }
+                    
+                    System.out.println("east : " + nextSquarePos );
+                    break;    // terminate loop when these two position has been gotten
+                }
+                // end
+            }
+        }
+        
+        
+       
+
+        System.out.println(squareContainerFullWidth);
+        System.out.println(squareContainerFullHeight);
+        
+        
+        
+        // resetting positions
+        nextSquarePos = currentXpos;
         
     }
 

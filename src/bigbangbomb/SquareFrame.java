@@ -41,9 +41,10 @@ public class SquareFrame extends JFrame{
             }
         }
         
-        // for setting height and with of frame
+        
         int MAX_HEIGHT = panel.getHeight();
         int MAX_WIDTH = panel.getWidth();
+        
         
         
         add(panel);
@@ -54,28 +55,14 @@ public class SquareFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    
-    
-    
     /**
-     * this will return the full width of container holding squares
-     * @return integer
+     * this is returned so it's attributes can be used in other class files
+     * attributes like ( width and height )
+     * @return JPanel
      */
-    public static int getFullWidthOfContainer( ){
-        return panel.getWidth();
+    public static JPanel squareContainer( ){
+        return panel;
     }
-    
-    
-    
-    /**
-     * this will return the full height of container holding squares
-     * @return integer
-     */
-    public static int getFullHeightOfContainer( ){
-        return panel.getHeight();
-    }
-    
-    
     
     
     
