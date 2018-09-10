@@ -162,7 +162,8 @@ public class SquarePanel extends JPanel implements MouseListener {
         int nextSquarePos = currentXpos;
         int prevSquarePos = squareSpaces;
         int squareNorthWestYpos = firstSquareHeightEnd;
-        int squareNorthWestXpos = squareSpaces;
+        int squareXpos = squareSpaces;
+        int squareSouthWestYpos = currentYpos + squareSpaces;
         
         
         while( true ){
@@ -176,13 +177,13 @@ public class SquarePanel extends JPanel implements MouseListener {
                 if ( currentXpos - squareSpaces > squareSpaces ){
                     prevSquarePos = currentXpos - squareSpaces;
                     
-                    // algorithm for getting square north-west from click position ( X )
+                    // algorithm for getting square x position to the left from click position 
                     if ( currentXpos - squareSpaces > squareSpaces ){
-                        squareNorthWestXpos = currentXpos - squareSpaces;
+                        squareXpos = currentXpos - squareSpaces;
                     }
                     
                     System.out.println("west : " + prevSquarePos);
-                    System.out.println("n-w : " + squareNorthWestXpos );
+                    System.out.println("nw : " + squareXpos );
                 }
                 // end
                 
