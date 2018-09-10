@@ -162,7 +162,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         int eastSquarePos = currentXpos;
         int westSquarePos = squareSpaces;
         int squareNorthWestYpos = firstSquareHeightEnd;
-        int squareSouthWestYpos = currentYpos + squareSpaces;
+        int squareSouthWestYpos = currentYpos;
         int southSquarePos = currentYpos;
         int northSquarePos = squareSpaces;
         
@@ -251,16 +251,16 @@ public class SquarePanel extends JPanel implements MouseListener {
                 System.out.println("southWest: " + squareSouthWestYpos );
                 
                 
-                
+            
                 // algorithm for getting square below click position
                 if (currentYpos < southSquarePos ){
-                    if ( southSquarePos - currentYpos < squareSpaces ){
-                        southSquarePos += ( currentYpos + squareSpaces );
+                    if ( southSquarePos + squareSpaces < squareContainerFullHeight ){
+                        southSquarePos =  currentYpos + squareSpaces ;
                     }
                     
                     
                     if ( southSquarePos >= squareContainerFullHeight ){
-                        southSquarePos = squareContainerFullHeight;
+                        southSquarePos = squareContainerFullHeight - 10;
                     }
                     
                     System.out.println("south : " + southSquarePos );
@@ -268,12 +268,7 @@ public class SquarePanel extends JPanel implements MouseListener {
                 }
                 // end
             }
-        }    
-
-           
-        // resetting positions
-        eastSquarePos = currentXpos;
-        southSquarePos = currentYpos;
+        }
         
         
         /**
@@ -299,10 +294,21 @@ public class SquarePanel extends JPanel implements MouseListener {
             if ( panel.getComponentCount() == 1 ){
                 bombsAround += 1;
             }
+            // testing if south square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(currentXpos, southSquarePos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            } 
             break;
         }
         
         System.out.println("Bomb Around : " + bombsAround);
+        
+        
+        
+        // resetting positions
+        eastSquarePos = currentXpos;
+        southSquarePos = currentYpos;
         
     }
 
