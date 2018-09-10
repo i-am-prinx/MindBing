@@ -162,9 +162,16 @@ public class SquarePanel extends JPanel implements MouseListener {
         int nextSquarePos = currentXpos;
         int prevSquarePos = squareSpaces;
         int squareNorthWestYpos = firstSquareHeightEnd;
-        int squareXpos = squareSpaces;
+        int squareXleftPos = squareSpaces;
+        int squareXrightPos = currentXpos + squareSpaces;
         int squareSouthWestYpos = currentYpos + squareSpaces;
         
+        
+        
+        /**
+         * Algorithm for getting the surrounding squares position around the 
+         * square a click event occur on.
+         */
         
         while( true ){
             System.out.println("loop");
@@ -175,16 +182,22 @@ public class SquarePanel extends JPanel implements MouseListener {
                 // that a click event is occuring on ( square to the west of click )
                 
                 if ( currentXpos - squareSpaces > squareSpaces ){
-                    prevSquarePos = currentXpos - squareSpaces;
-                    
-                    // algorithm for getting square x position to the left from click position 
-                    if ( currentXpos - squareSpaces > squareSpaces ){
-                        squareXpos = currentXpos - squareSpaces;
-                    }
-                    
-                    System.out.println("west : " + prevSquarePos);
-                    System.out.println("nw : " + squareXpos );
+                    prevSquarePos = currentXpos - squareSpaces;             
                 }
+                // end
+                System.out.println("west : " + prevSquarePos);
+                
+                
+                
+                // algorithm for getting square x position to the left from click position 
+                if ( currentXpos - squareSpaces > squareSpaces ){
+                    squareXleftPos = currentXpos - squareSpaces;
+                }
+                // end
+                
+                
+                // algorithm for getting square x position to the right from click position
+                squareXrightPos = currentXpos + squareSpaces;
                 // end
                 
                 
@@ -219,15 +232,29 @@ public class SquarePanel extends JPanel implements MouseListener {
                 // algorithm for getting square above click position ( north )
                 if ( currentYpos - squareAbovePos > squareSpaces ){
                     squareAbovePos = currentYpos - squareSpaces;
-                    
-                    // algorithm for getting square north-west of click position( Y )
-                    if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
-                        squareNorthWestYpos = currentYpos - prevSquarePos;
-                    }
-                    
                 }
                 // end
+                
+                
+                // algorithm for getting square north-west from click position( Y )
+                if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
+                    squareNorthWestYpos = currentYpos - prevSquarePos;
+                }
+                // end
+                
+                
+                // algorithm for getting square north-east from click position ( Y )
+                
+                
+                
+                // algorithm for getting square south-west of click position( Y )
+                squareSouthWestYpos = currentYpos + squareSpaces;
+                // end    
+                
                 System.out.println("north : " + squareAbovePos + "\nnwY : " + squareNorthWestYpos );
+                System.out.println("southWest: " + squareSouthWestYpos );
+                
+                
                 
                 // algorithm for getting square below click position
                 if (currentYpos < squareBelowPos ){
@@ -247,12 +274,6 @@ public class SquarePanel extends JPanel implements MouseListener {
             }
         }    
 
-        
-        
-       
-
-        System.out.println(squareContainerFullWidth);
-        System.out.println(squareContainerFullHeight);
         
         
         
