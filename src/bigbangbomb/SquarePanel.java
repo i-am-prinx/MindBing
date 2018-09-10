@@ -165,17 +165,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         int squareSouthWestYpos = currentYpos;
         int southSquarePos = currentYpos;
         int northSquarePos = squareSpaces;
-        
-        /**
-         * it should be noted that square at the northeast and southeast of click
-         * event have same width position. the only difference is the height.
-         * for square at northeast squareSpaces will be subtracted from the 
-         * current Y position and for square at southeast squareSpaces will be 
-         * added to the current Y position.
-         */
-        int squareNorthEastXpos = squareContainerFullWidth;
-        int squareSouthEastXpos = squareContainerFullWidth;
-        
+        int northEastSquarePos = currentYpos;
         
         
         /**
@@ -239,7 +229,9 @@ public class SquarePanel extends JPanel implements MouseListener {
                 
                 
                 // algorithm for getting square north-east from click position ( Y )
-                
+                if ( currentYpos - squareSpaces > squareSpaces ){
+                    northEastSquarePos = currentYpos - squareSpaces;
+                }
                 
                 
                 // algorithm for getting square south-west of click position( Y )
@@ -265,8 +257,12 @@ public class SquarePanel extends JPanel implements MouseListener {
                     }
                     
                     
-                    if ( southSquarePos >= squareContainerFullHeight ){
+                    if ( southSquarePos > squareContainerFullHeight ){
                         southSquarePos = squareContainerFullHeight - 8;
+                    }
+                    
+                    if ( northEastSquarePos > squareSpaces ){
+                        northEastSquarePos = squareSpaces;
                     }
                     
                     System.out.println("south : " + southSquarePos );
@@ -307,6 +303,16 @@ public class SquarePanel extends JPanel implements MouseListener {
             }
             // testing if south-west square holds any bomb
             panel = (JPanel) squareContainer.getComponentAt(westSquarePos, squareSouthWestYpos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
+            // testing if north-west square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(westSquarePos, squareNorthWestYpos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
+            // testing if north-east square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(eastSquarePos, northEastSquarePos);
             if ( panel.getComponentCount() == 1 ){
                 bombsAround += 1;
             }
