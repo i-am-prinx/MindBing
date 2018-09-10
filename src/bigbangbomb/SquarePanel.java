@@ -196,6 +196,41 @@ public class SquarePanel extends JPanel implements MouseListener {
         }
         
         
+        
+        int squareBelowPos = currentYpos;
+        int squareAbovePos = squareSpaces;
+        
+        while( true ){
+            if ( currentYpos <= squareContainerFullHeight && currentYpos >= 33 ){
+                squareBelowPos += squareSpaces;
+                
+                // algorithm for getting square above click position 
+                if ( currentYpos - squareAbovePos > squareSpaces ){
+                    squareAbovePos = currentYpos - squareSpaces;
+                    System.out.println("north : " + squareAbovePos);
+                }
+                // end
+                
+                // algorithm for getting square below click position
+                if (currentYpos < squareBelowPos ){
+                    if ( squareBelowPos - currentYpos < squareSpaces ){
+                        squareBelowPos += ( currentYpos + squareSpaces );
+                    }
+                    
+                    
+                    if ( squareBelowPos >= squareContainerFullHeight ){
+                        squareBelowPos = squareContainerFullHeight;
+                    }
+                    
+                    System.out.println("south : " + squareBelowPos );
+                    break;
+                }
+                // end
+            }
+        }    
+
+        
+        
        
 
         System.out.println(squareContainerFullWidth);
@@ -205,6 +240,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         
         // resetting positions
         nextSquarePos = currentXpos;
+        squareBelowPos = currentYpos;
         
     }
 
