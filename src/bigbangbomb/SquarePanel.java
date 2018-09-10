@@ -162,6 +162,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         int nextSquarePos = currentXpos;
         int prevSquarePos = squareSpaces;
         int squareNorthWestYpos = firstSquareHeightEnd;
+        int squareNorthWestXpos = squareSpaces;
         
         
         while( true ){
@@ -175,11 +176,13 @@ public class SquarePanel extends JPanel implements MouseListener {
                 if ( currentXpos - squareSpaces > squareSpaces ){
                     prevSquarePos = currentXpos - squareSpaces;
                     
-                    if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
-                        squareNorthWestYpos = currentYpos - prevSquarePos;
+                    // algorithm for getting square north-west from click position ( X )
+                    if ( currentXpos - squareSpaces > squareSpaces ){
+                        squareNorthWestXpos = currentXpos - squareSpaces;
                     }
                     
-                    System.out.println("west : " + prevSquarePos + "\nnorth-west : " + squareNorthWestYpos);
+                    System.out.println("west : " + prevSquarePos);
+                    System.out.println("n-w : " + squareNorthWestXpos );
                 }
                 // end
                 
@@ -212,12 +215,18 @@ public class SquarePanel extends JPanel implements MouseListener {
             if ( currentYpos <= squareContainerFullHeight && currentYpos >= 33 ){
                 squareBelowPos += squareSpaces;
                 
-                // algorithm for getting square above click position 
+                // algorithm for getting square above click position ( north )
                 if ( currentYpos - squareAbovePos > squareSpaces ){
                     squareAbovePos = currentYpos - squareSpaces;
-                    System.out.println("north : " + squareAbovePos);
+                    
+                    // algorithm for getting square north-west of click position( Y )
+                    if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
+                        squareNorthWestYpos = currentYpos - prevSquarePos;
+                    }
+                    
                 }
                 // end
+                System.out.println("north : " + squareAbovePos + "\nnwY : " + squareNorthWestYpos );
                 
                 // algorithm for getting square below click position
                 if (currentYpos < squareBelowPos ){
