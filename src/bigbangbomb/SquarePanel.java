@@ -282,8 +282,27 @@ public class SquarePanel extends JPanel implements MouseListener {
          * occur.
          */
         
+        int bombsAround = 0;
+        while ( true ){
+            // testing if north square holds any bomb
+            JPanel panel = (JPanel) squareContainer.getComponentAt(currentXpos, northSquarePos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
+            // testing if east square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(eastSquarePos, currentYpos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
+            // testing if west square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(westSquarePos, currentYpos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
+            break;
+        }
         
-        
+        System.out.println("Bomb Around : " + bombsAround);
         
     }
 

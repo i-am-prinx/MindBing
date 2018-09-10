@@ -27,7 +27,7 @@ public class SquareFrame extends JFrame{
         JPanel[][] fp = new GridDimension().callNextGrid();
         
         panel.setLayout(new MigLayout());
-        
+    
         for ( int i = 0 ; i < fp.length; i++) {
             for ( int j = fp[i].length-1; j > 0 ; j-- ) {
                if ( j == 1 ){
