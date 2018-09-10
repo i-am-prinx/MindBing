@@ -155,15 +155,18 @@ public class SquarePanel extends JPanel implements MouseListener {
          * displayed, since they all have equal width and height
          */
         
+        int firstSquareWidthStart = 10;
+        int firstSquareHeightEnd = 112;
         
         int squareSpaces = 84;
         int nextSquarePos = currentXpos;
         int prevSquarePos = squareSpaces;
+        int squareNorthWestPos = firstSquareHeightEnd;
         
         
         while( true ){
             System.out.println("loop");
-            if ( currentXpos <= squareContainerFullWidth && currentXpos >= 10 ){
+            if ( currentXpos <= squareContainerFullWidth && currentXpos >= firstSquareWidthStart ){
                 nextSquarePos += squareSpaces;
                 
                 // algorithm for getting the square before the current square
@@ -171,7 +174,12 @@ public class SquarePanel extends JPanel implements MouseListener {
                 
                 if ( currentXpos - squareSpaces > squareSpaces ){
                     prevSquarePos = currentXpos - squareSpaces;
-                    System.out.println("west : " + prevSquarePos );
+                    
+                    if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
+                        squareNorthWestPos = currentYpos - prevSquarePos;
+                    }
+                    
+                    System.out.println("west : " + prevSquarePos + "\nnorth-west : " + squareNorthWestPos);
                 }
                 // end
                 
