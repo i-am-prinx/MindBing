@@ -157,14 +157,24 @@ public class SquarePanel extends JPanel implements MouseListener {
         
         int firstSquareWidthStart = 10;
         int firstSquareHeightEnd = 112;
-        
         int squareSpaces = 84;
-        int nextSquarePos = currentXpos;
-        int prevSquarePos = squareSpaces;
+        
+        int eastSquarePos = currentXpos;
+        int westSquarePos = squareSpaces;
         int squareNorthWestYpos = firstSquareHeightEnd;
-        int squareXleftPos = squareSpaces;
-        int squareXrightPos = currentXpos + squareSpaces;
         int squareSouthWestYpos = currentYpos + squareSpaces;
+        int southSquarePos = currentYpos;
+        int northSquarePos = squareSpaces;
+        
+        /**
+         * it should be noted that square at the northeast and southeast of click
+         * event have same width position. the only difference is the height.
+         * for square at northeast squareSpaces will be subtracted from the 
+         * current Y position and for square at southeast squareSpaces will be 
+         * added to the current Y position.
+         */
+        int squareNorthEastXpos = squareContainerFullWidth;
+        int squareSouthEastXpos = squareContainerFullWidth;
         
         
         
@@ -176,44 +186,32 @@ public class SquarePanel extends JPanel implements MouseListener {
         while( true ){
             System.out.println("loop");
             if ( currentXpos <= squareContainerFullWidth && currentXpos >= firstSquareWidthStart ){
-                nextSquarePos += squareSpaces;
+                eastSquarePos += squareSpaces;
                 
                 // algorithm for getting the square before the current square
                 // that a click event is occuring on ( square to the west of click )
                 
                 if ( currentXpos - squareSpaces > squareSpaces ){
-                    prevSquarePos = currentXpos - squareSpaces;             
+                    westSquarePos = currentXpos - squareSpaces;             
                 }
                 // end
-                System.out.println("west : " + prevSquarePos);
-                
-                
-                
-                // algorithm for getting square x position to the left from click position 
-                if ( currentXpos - squareSpaces > squareSpaces ){
-                    squareXleftPos = currentXpos - squareSpaces;
-                }
-                // end
-                
-                
-                // algorithm for getting square x position to the right from click position
-                squareXrightPos = currentXpos + squareSpaces;
-                // end
+                System.out.println("west : " + westSquarePos);
+
                 
                 
                 // algorithm for getting the square after the current square that
                 // a click event is occuring on ( square to east of click )
                 
-                if ( currentXpos < nextSquarePos ){
-                    if ( nextSquarePos - currentXpos < squareSpaces ){
-                        nextSquarePos += ( currentXpos + squareSpaces );
+                if ( currentXpos < eastSquarePos ){
+                    if ( eastSquarePos - currentXpos < squareSpaces ){
+                        eastSquarePos += ( currentXpos + squareSpaces );
                     }
                     
-                    if ( nextSquarePos >= squareContainerFullWidth ){
-                        nextSquarePos = squareContainerFullWidth - 15;
+                    if ( eastSquarePos >= squareContainerFullWidth ){
+                        eastSquarePos = squareContainerFullWidth - 15;
                     }
                     
-                    System.out.println("east : " + nextSquarePos );
+                    System.out.println("east : " + eastSquarePos );
                     break;    // terminate loop when these two position has been gotten
                 }
                 // end
@@ -222,23 +220,21 @@ public class SquarePanel extends JPanel implements MouseListener {
         
         
         
-        int squareBelowPos = currentYpos;
-        int squareAbovePos = squareSpaces;
         
         while( true ){
             if ( currentYpos <= squareContainerFullHeight && currentYpos >= 33 ){
-                squareBelowPos += squareSpaces;
+                southSquarePos += squareSpaces;
                 
                 // algorithm for getting square above click position ( north )
-                if ( currentYpos - squareAbovePos > squareSpaces ){
-                    squareAbovePos = currentYpos - squareSpaces;
+                if ( currentYpos - northSquarePos > squareSpaces ){
+                    northSquarePos = currentYpos - squareSpaces;
                 }
                 // end
                 
                 
                 // algorithm for getting square north-west from click position( Y )
-                if ( currentYpos - prevSquarePos > firstSquareHeightEnd ){
-                    squareNorthWestYpos = currentYpos - prevSquarePos;
+                if ( currentYpos - squareSpaces > firstSquareHeightEnd ){
+                    squareNorthWestYpos = currentYpos - squareSpaces;
                 }
                 // end
                 
@@ -251,35 +247,43 @@ public class SquarePanel extends JPanel implements MouseListener {
                 squareSouthWestYpos = currentYpos + squareSpaces;
                 // end    
                 
-                System.out.println("north : " + squareAbovePos + "\nnwY : " + squareNorthWestYpos );
+                System.out.println("north : " + northSquarePos + "\nnwY : " + squareNorthWestYpos );
                 System.out.println("southWest: " + squareSouthWestYpos );
                 
                 
                 
                 // algorithm for getting square below click position
-                if (currentYpos < squareBelowPos ){
-                    if ( squareBelowPos - currentYpos < squareSpaces ){
-                        squareBelowPos += ( currentYpos + squareSpaces );
+                if (currentYpos < southSquarePos ){
+                    if ( southSquarePos - currentYpos < squareSpaces ){
+                        southSquarePos += ( currentYpos + squareSpaces );
                     }
                     
                     
-                    if ( squareBelowPos >= squareContainerFullHeight ){
-                        squareBelowPos = squareContainerFullHeight;
+                    if ( southSquarePos >= squareContainerFullHeight ){
+                        southSquarePos = squareContainerFullHeight;
                     }
                     
-                    System.out.println("south : " + squareBelowPos );
+                    System.out.println("south : " + southSquarePos );
                     break;
                 }
                 // end
             }
         }    
 
-        
-        
-        
+           
         // resetting positions
-        nextSquarePos = currentXpos;
-        squareBelowPos = currentYpos;
+        eastSquarePos = currentXpos;
+        southSquarePos = currentYpos;
+        
+        
+        /**
+         * CHECK POINT :: CHECKPOINT :: CHECKPOINT :: CHECKPOINT :: CHECKPOINT ::
+         * checking if there are bomb in surrounding squares where click event
+         * occur.
+         */
+        
+        
+        
         
     }
 
