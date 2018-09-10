@@ -196,7 +196,6 @@ public class SquarePanel extends JPanel implements MouseListener {
                 }
                 // end
                 System.out.println("west : " + westSquarePos);
-
                 
                 
                 // algorithm for getting the square after the current square that
@@ -244,7 +243,9 @@ public class SquarePanel extends JPanel implements MouseListener {
                 
                 
                 // algorithm for getting square south-west of click position( Y )
-                squareSouthWestYpos = currentYpos + squareSpaces;
+                if ( currentYpos + squareSpaces < squareContainerFullHeight ){
+                    squareSouthWestYpos = currentYpos + squareSpaces;
+                }
                 // end    
                 
                 System.out.println("north : " + northSquarePos + "\nnwY : " + squareNorthWestYpos );
@@ -259,8 +260,13 @@ public class SquarePanel extends JPanel implements MouseListener {
                     }
                     
                     
+                    if ( squareSouthWestYpos > squareContainerFullHeight ){
+                        squareSouthWestYpos = squareContainerFullHeight - 8;
+                    }
+                    
+                    
                     if ( southSquarePos >= squareContainerFullHeight ){
-                        southSquarePos = squareContainerFullHeight - 10;
+                        southSquarePos = squareContainerFullHeight - 8;
                     }
                     
                     System.out.println("south : " + southSquarePos );
@@ -298,7 +304,12 @@ public class SquarePanel extends JPanel implements MouseListener {
             panel = (JPanel) squareContainer.getComponentAt(currentXpos, southSquarePos);
             if ( panel.getComponentCount() == 1 ){
                 bombsAround += 1;
-            } 
+            }
+            // testing if south-west square holds any bomb
+            panel = (JPanel) squareContainer.getComponentAt(westSquarePos, squareSouthWestYpos);
+            if ( panel.getComponentCount() == 1 ){
+                bombsAround += 1;
+            }
             break;
         }
         
