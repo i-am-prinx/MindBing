@@ -6,13 +6,10 @@
 package bigbangbomb;
 
 
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.BorderLayout;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -25,7 +22,8 @@ public class EventNotifier {
     private static JPanel squareContainer = SquareFrame.squareContainer();
     private static int WIDTH = squareContainer.getWidth();
     private static int lifeRemaining = Player.getGameLife();
-    private static JLabel lifeLabel, lifeNotify;
+    private static int bombsAroundClickPos;
+    private static JLabel lifeLabel, lifeNotify, bombAroundLabel, bombAroundNotify;
     private static JPanel SMFN = new JPanel();
     
     
@@ -38,8 +36,10 @@ public class EventNotifier {
     public static JPanel notificationBar(){
         JPanel notifierBar = new JPanel();
         notifierBar.setLayout(new MigLayout());
-        notifierBar.setSize(WIDTH, 300);
+        notifierBar.setSize(WIDTH, 10);
         notifierBar.setBackground(Color.darkGray);
+        
+        
         
         lifeNotify = new JLabel("GuessLife : ");
         lifeNotify.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
@@ -55,10 +55,24 @@ public class EventNotifier {
             lifeLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
         }
         
+        bombAroundNotify = new JLabel("Bomb around Click Position : ");
+        bombAroundNotify.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+        bombAroundNotify.setForeground(Color.magenta);
+        bombAroundNotify.setBounds(10, 10, 10, 10);
+        
+        
+        bombAroundLabel = new JLabel(" "+ bombsAroundClickPos);
+        bombAroundLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+        bombAroundLabel.setForeground(Color.GREEN);
+        bombAroundLabel.setBounds(15, 15, 65, 15);
+        
         ConfiguredShowMsgForNeutralize();
+        setBombAroundSquare(bombsAroundClickPos);
         
         notifierBar.add(lifeNotify);
-        notifierBar.add(lifeLabel, "wrap" );
+        notifierBar.add(lifeLabel, "push" );
+        notifierBar.add(bombAroundNotify);
+        notifierBar.add(bombAroundLabel, "wrap");
         notifierBar.add(SMFN, "span");
         return notifierBar;
     }
@@ -92,5 +106,9 @@ public class EventNotifier {
      */
     public static void showSMFN(){
         SMFN.setVisible(true);
+    }
+    
+    public static void setBombAroundSquare( int bombsAround ){
+        bombsAroundClickPos = bombsAround;
     }
 }

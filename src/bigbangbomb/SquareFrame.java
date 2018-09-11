@@ -45,7 +45,7 @@ public class SquareFrame extends JFrame{
         int MAX_HEIGHT = panel.getHeight();
         int MAX_WIDTH = panel.getWidth();
         
-        add(notifyBar, BorderLayout.NORTH);
+        add(notifyBar, BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER);
         setVisible(true);
         setSize(MAX_WIDTH, MAX_HEIGHT);
