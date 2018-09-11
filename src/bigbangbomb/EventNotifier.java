@@ -22,9 +22,9 @@ public class EventNotifier {
     private static JPanel squareContainer = SquareFrame.squareContainer();
     private static int WIDTH = squareContainer.getWidth();
     private static int lifeRemaining = Player.getGameLife();
-    private static int bombsAroundClickPos;
     private static JLabel lifeLabel, lifeNotify, bombAroundLabel, bombAroundNotify;
     private static JPanel SMFN = new JPanel();
+    private static JPanel bombAroundSquare = new JPanel();
     
     
     
@@ -52,27 +52,14 @@ public class EventNotifier {
         lifeLabel.setBounds(15, 15, 65, 15);
         if ( lifeRemaining < 3){
             lifeLabel.setForeground(Color.RED);
-            lifeLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
+            lifeLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         }
         
-        bombAroundNotify = new JLabel("Bomb around Click Position : ");
-        bombAroundNotify.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
-        bombAroundNotify.setForeground(Color.magenta);
-        bombAroundNotify.setBounds(10, 10, 10, 10);
-        
-        
-        bombAroundLabel = new JLabel(" "+ bombsAroundClickPos);
-        bombAroundLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
-        bombAroundLabel.setForeground(Color.GREEN);
-        bombAroundLabel.setBounds(15, 15, 65, 15);
-        
         ConfiguredShowMsgForNeutralize();
-        setBombAroundSquare(bombsAroundClickPos);
         
         notifierBar.add(lifeNotify);
-        notifierBar.add(lifeLabel, "push" );
-        notifierBar.add(bombAroundNotify);
-        notifierBar.add(bombAroundLabel, "wrap");
+        notifierBar.add(lifeLabel, "push, push" );
+        notifierBar.add(bombAroundSquare, "wrap, push");
         notifierBar.add(SMFN, "span");
         return notifierBar;
     }
@@ -94,6 +81,47 @@ public class EventNotifier {
         SMFN.add(neutralizeMsg);
     }
     
+    
+    /**
+     * this will help to set a new text on the bombAroundPanel, so a user will
+     * always know the amount of squares around the square where click event 
+     * occur on
+     * @param bombsAround
+     *    this is the amount of bomb surrounding the square where click event
+     *    occur on
+     *          
+     * @param txt 
+     *    this is the text that will suffice the amount of bomb.
+     */
+    public static void setBombAroundSquare( int bombsAround, String txt ){
+        bombAroundSquare.setBackground(Color.darkGray);
+        bombAroundSquare.setLayout(new MigLayout());
+        
+        bombAroundNotify = new JLabel();
+        bombAroundNotify.setText(txt);
+        bombAroundNotify.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+        bombAroundNotify.setForeground(Color.magenta);
+        bombAroundNotify.setBounds(10, 10, 10, 10);
+        
+        bombAroundLabel = new JLabel(" "+ bombsAround);
+        bombAroundLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+        bombAroundLabel.setForeground(Color.GREEN);
+        bombAroundLabel.setBounds(15, 15, 65, 15);
+        
+        bombAroundSquare.add(bombAroundNotify);
+        bombAroundSquare.add(bombAroundLabel);
+    }
+    
+    /**
+     * For each time a new new square is clicked we want the new figure of bomb
+     * around the square that is clicked, hence this method will always help to
+     * remove the previous text.
+     */
+    public static void resetBombAroundNotify(){
+        bombAroundSquare.removeAll();
+    }
+    
+    
     /**
      * this will be used to hide messageForNeutralize from displaying when not needed
      */
@@ -101,14 +129,11 @@ public class EventNotifier {
         SMFN.setVisible(false);
     }
     
+    
     /**
      * this will be used to show messageForNeutralize ( so it displays ) when needed.
      */
     public static void showSMFN(){
         SMFN.setVisible(true);
-    }
-    
-    public static void setBombAroundSquare( int bombsAround ){
-        bombsAroundClickPos = bombsAround;
     }
 }

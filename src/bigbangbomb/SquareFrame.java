@@ -3,6 +3,7 @@ package bigbangbomb;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -20,9 +21,11 @@ import net.miginfocom.swing.MigLayout;
 public class SquareFrame extends JFrame{
     private static JPanel panel = new JPanel();
     private static JPanel notifyBar = EventNotifier.notificationBar();
+    private static JPanel notifyHolder = new JPanel();
+    
     
     SquareFrame( ) {
-        super();       
+        super("*- Mind~Bing -*");       
         setLayout(new BorderLayout());
         
         JPanel[][] fp = new GridDimension().callNextGrid();
@@ -45,10 +48,9 @@ public class SquareFrame extends JFrame{
         int MAX_HEIGHT = panel.getHeight();
         int MAX_WIDTH = panel.getWidth();
         
-        add(notifyBar, BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER);
+        add(notifyBar, BorderLayout.SOUTH);
         setVisible(true);
-        setSize(MAX_WIDTH, MAX_HEIGHT);
         pack();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +74,7 @@ public class SquareFrame extends JFrame{
      * @param args 
      */
     public static void main (String args[]){
-        SquareFrame bbb = new SquareFrame();
+        SquareFrame mindBing = new SquareFrame();
+        mindBing.setSize(440, 500);     // increases the width to fit notifier text
     }
 }

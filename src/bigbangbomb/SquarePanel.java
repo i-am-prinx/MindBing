@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 public class SquarePanel extends JPanel implements MouseListener {
     private boolean flag = false;
     private JPanel squareContainer = SquareFrame.squareContainer();
+    private String text = "Bomb around C.P : ";
      
     SquarePanel() {
         super();
@@ -97,7 +98,6 @@ public class SquarePanel extends JPanel implements MouseListener {
                }
            }
         }
-        
         
         /**
          * algorithm to check for surrounding squares around where a user 
@@ -333,11 +333,16 @@ public class SquarePanel extends JPanel implements MouseListener {
         System.out.println("Bomb Around : " + bombsAround);
         
         
-        
         // resetting positions
         eastSquarePos = currentXpos;
         southSquarePos = currentYpos;
         
+        // this will remove whatever text that have been present in bombAroundNotifyPanel
+        EventNotifier.resetBombAroundNotify();
+        
+        // this will add a new text to bombAroundNotifyPanel
+        EventNotifier.setBombAroundSquare(bombsAround, text);
+
     }
 
     @Override
