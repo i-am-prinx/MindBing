@@ -12,7 +12,28 @@ public class Player {
      * this variable will be used to determine the level of the player and the 
      * amount of grid that will be displayed for that level.
      */
-    private static int currentLevel = 1;
+    private static int currentLevel = 1; 
+    private static int gameLife = 5;
+    
+    
+    
+    /**
+     * This will reduce the game life of a player
+     * @return integer
+     */
+    public static int reduceLife(){
+        return gameLife -= 1;
+    }
+    
+    
+    
+    /**
+     * This will increase the game life of a player
+     * @return integer
+     */
+    public static int increaseLife(){
+        return gameLife += 1;
+    }
     
     
     
@@ -31,6 +52,15 @@ public class Player {
      */
     private static void nextLevel( ) {
         currentLevel++;
+    }
+    
+    
+    /**
+     * This will help get the current game life of a player
+     * @return integer
+     */
+    public static int getGameLife(){
+        return gameLife;
     }
     
     

@@ -19,6 +19,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class SquareFrame extends JFrame{
     private static JPanel panel = new JPanel();
+    private static JPanel notifyBar = EventNotifier.notificationBar();
     
     SquareFrame( ) {
         super();       
@@ -27,7 +28,7 @@ public class SquareFrame extends JFrame{
         JPanel[][] fp = new GridDimension().callNextGrid();
         
         panel.setLayout(new MigLayout());
-    
+        
         for ( int i = 0 ; i < fp.length; i++) {
             for ( int j = fp[i].length-1; j > 0 ; j-- ) {
                if ( j == 1 ){
@@ -44,16 +45,18 @@ public class SquareFrame extends JFrame{
         
         int MAX_HEIGHT = panel.getHeight();
         int MAX_WIDTH = panel.getWidth();
+        add(notifyBar, BorderLayout.NORTH);
         
         
-        
-        add(panel);
+        add(panel, BorderLayout.CENTER);
         setVisible(true);
         setSize(MAX_WIDTH, MAX_HEIGHT);
         pack();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
+    
     
     /**
      * this is returned so it's attributes can be used in other class files
