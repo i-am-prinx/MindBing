@@ -42,12 +42,10 @@ public class SquareFrame extends JFrame{
             }
         }
         
-        
         int MAX_HEIGHT = panel.getHeight();
         int MAX_WIDTH = panel.getWidth();
+        
         add(notifyBar, BorderLayout.NORTH);
-        
-        
         add(panel, BorderLayout.CENTER);
         setVisible(true);
         setSize(MAX_WIDTH, MAX_HEIGHT);
@@ -67,7 +65,7 @@ public class SquareFrame extends JFrame{
         return panel;
     }
     
-    
+        
     
     /*** this main method will be removed from this file, it's just for testing
      * if the grid system is working as expected...

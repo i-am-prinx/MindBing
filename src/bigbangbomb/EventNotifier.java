@@ -26,6 +26,9 @@ public class EventNotifier {
     private static int WIDTH = squareContainer.getWidth();
     private static int lifeRemaining = Player.getGameLife();
     private static JLabel lifeLabel, lifeNotify;
+    private static JPanel SMFN = new JPanel();
+    
+    
     
     /**
      * will be displayed before the grid will be displayed on the game menu
@@ -52,9 +55,42 @@ public class EventNotifier {
             lifeLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
         }
         
-        notifierBar.add(lifeNotify);
-        notifierBar.add(lifeLabel );
+        ConfiguredShowMsgForNeutralize();
         
+        notifierBar.add(lifeNotify);
+        notifierBar.add(lifeLabel, "wrap" );
+        notifierBar.add(SMFN, "span");
         return notifierBar;
+    }
+    
+    
+    /**
+     * this will output a message anytime a bomb was successfully neutralized.
+     * by default this is hidden, when needed showSMFN should be called.
+     * @param msg
+     * @return JPanel
+     */
+    private static void ConfiguredShowMsgForNeutralize( ){
+        SMFN.setBackground(Color.darkGray);
+        
+        JLabel neutralizeMsg = new JLabel("Bomb was succefully Neutralized");
+        neutralizeMsg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+        neutralizeMsg.setForeground(Color.YELLOW);
+        SMFN.setVisible(false);
+        SMFN.add(neutralizeMsg);
+    }
+    
+    /**
+     * this will be used to hide messageForNeutralize from displaying when not needed
+     */
+    public static void hideSMFN(){
+        SMFN.setVisible(false);
+    }
+    
+    /**
+     * this will be used to show messageForNeutralize ( so it displays ) when needed.
+     */
+    public static void showSMFN(){
+        SMFN.setVisible(true);
     }
 }

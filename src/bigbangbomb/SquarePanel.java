@@ -82,15 +82,19 @@ public class SquarePanel extends JPanel implements MouseListener {
                JPanel src = (JPanel)e.getSource();
                if ( src.getComponentCount() == 1 ){
                    src.setBackground(Color.red);
-               }
+                   EventNotifier.hideSMFN();
+               }    
                else {
                    src.setBackground(Color.green);
+                   EventNotifier.hideSMFN();
                }
            }
            else if ( e.getClickCount() == 2 ){
                JPanel src = (JPanel)e.getSource();
                if (src.getComponentCount() == 1 ){
                    src.setBackground(Color.blue);
+                   
+                   EventNotifier.showSMFN();  
                }
            }
         }
