@@ -9,9 +9,8 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Agbonxoft Prince
  */
-/**
- * frame that displays the grid system.
- */
+
+
 public class SquareFrame extends JFrame {
 
     private static JPanel panel = new JPanel();
@@ -42,6 +41,7 @@ public class SquareFrame extends JFrame {
         setVisible(true);
         pack();
         setResizable(false);
+//        setAlwaysOnTop(rootPaneCheckingEnabled);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -63,6 +63,6 @@ public class SquareFrame extends JFrame {
      */
     public static void main(String args[]) {
         SquareFrame mindBing = new SquareFrame();
-        mindBing.setSize(470, 500);     // increases the width to fit notifier text
+//        mindBing.setSize(470, 500);     // increases the width to fit notifier text
     }
 }
