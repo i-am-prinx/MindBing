@@ -69,7 +69,7 @@ public class SquarePanel extends JPanel implements MouseListener {
                     EventNotifier.showSMFN();
                 } else {
                     Player.reduceLife();
-                    EventNotifier.showSMFRL();
+                    EventNotifier.showSMFRL();  
                     // reduce player's life
                 }
             }
@@ -222,6 +222,14 @@ public class SquarePanel extends JPanel implements MouseListener {
         EventNotifier.showBombAround();
         
         bombsAround = eastSquare = southSquare = northSquare = westSquare = 0;
+        
+         // If player's life equals Zero, then game should end
+        int endGameWithLife = Player.getGameLife();
+        if ( endGameWithLife  == 0 ){
+            EventNotifier.hideNotifierPanel();
+            System.out.println("Game Over");
+            SquareFrame.hideSquareContainer();
+        }
     }
 
     @Override

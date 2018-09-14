@@ -18,9 +18,10 @@ public class EventNotifier {
     private static JPanel SMFN = new JPanel();
     private static JPanel SMFRL = new JPanel();
     private static int gameLife = Player.getGameLife();
-    private static JPanel lifeNotifyPanel = new JPanel(); 
+    private static JPanel lifeNotifyPanel = new JPanel();
     private static JPanel bombAroundSquare = new JPanel();
     private static int bombAround = SquarePanel.getBombAround();
+    private static JPanel notifierBar = new JPanel();
     private static JLabel lifeLabel, lifeNotify, bombAroundLabel, bombAroundNotify;
     
     
@@ -28,27 +29,27 @@ public class EventNotifier {
     //*************** Show Message For Reduced Life ( SMFRL )
     
     /**
-     * will be displayed before the grid will be displayed on the game menu
+     * will be displayed before after grid is displayed on the game window
      * which will hold users remaining life and events that happens when 
      * click event is performed on a square.
      */
     public static JPanel notificationBar(){
-        JPanel notifierBar = new JPanel();
         notifierBar.setLayout(new MigLayout());
         notifierBar.setBackground(Color.darkGray);
         
-        ConfiguredShowMsgForNeutralize();
-        ConfiguredShowMsgForReducedLife();
+        configureShowMsgForNeutralize();
+        configureShowMsgForReducedLife();
         
         setLife(gameLife);
         
         setBombAroundSquare(bombAround);
+        
                 
         
         notifierBar.add(bombAroundSquare, "push");
         notifierBar.add(lifeNotifyPanel, "wrap" );
         notifierBar.add(SMFN);
-                notifierBar.add(SMFRL);
+        notifierBar.add(SMFRL, "wrap");
         return notifierBar;
     } 
     
@@ -58,7 +59,7 @@ public class EventNotifier {
      * @param msg
      * @return JPanel
      */
-    private static void ConfiguredShowMsgForNeutralize( ){
+    private static void configureShowMsgForNeutralize( ){
         SMFN.setBackground(Color.darkGray);
         
         JLabel neutralizeMsg = new JLabel("Bomb Neutralized");
@@ -73,7 +74,7 @@ public class EventNotifier {
      * this prints out message on the notifier panel whenever a user double clicks
      * on a grid that doesn't contain a bomb.
      */
-    private static void ConfiguredShowMsgForReducedLife( ){
+    private static void configureShowMsgForReducedLife( ){
         SMFRL.setBackground(Color.darkGray);
         
         JLabel reducedLifeMsg = new JLabel("life reduced");
@@ -82,7 +83,6 @@ public class EventNotifier {
         SMFRL.setVisible(false);
         SMFRL.add(reducedLifeMsg);
     }
-    
     
     /**
      * this will help to set a new text on the bombAroundPanel, so a user will
@@ -164,7 +164,7 @@ public class EventNotifier {
     
     
     /**
-     * this will be used to hide messageForNeutralize from displaying when not needed
+     * this is  used to hide messageForNeutralize from displaying when not needed
      */
     public static void hideSMFN(){
         SMFN.setVisible(false);
@@ -172,7 +172,7 @@ public class EventNotifier {
     
     
     /**
-     * this will be used to show messageForNeutralize ( so it displays ) when needed.
+     * helps to display messageForNeutralize ( so it displays ) when needed.
      */
     public static void showSMFN(){
         SMFN.setVisible(true);
@@ -180,31 +180,59 @@ public class EventNotifier {
     
     
      /**
-     * this will be used to hide messageForNeutralize from displaying when not needed
+     * helps to hide message for reduced life from displaying when not needed
      */
     public static void hideSMFRL(){
         SMFRL.setVisible(false);
     }
     
     /**
-     * this will be used to show messageForNeutralize ( so it displays ) when needed.
+     * helps to display message of player's life when needed.
      */
     public static void showSMFRL(){
         SMFRL.setVisible(true);
     }
     
     /**
-     * this will be used to show messageForBombs around
+     * helps to display message for bombs around
      */
     public static void showBombAround(){
         bombAroundSquare.setVisible(true);
     }
     
     /**
-     * this will be used to hide messageForBombs around
+     * helps to hide message for bombs around
      */
     public static void hideBombAround(){
         bombAroundSquare.setVisible(false);
+    }
+    
+    /**
+     * helps to hide life remaining notifier.
+     */
+    public static void hideLifeRemainingPanel(){
+        lifeNotifyPanel.setVisible(false);
+    }
+    
+    /**
+     * helps to display life remaining notifier.
+     */
+    public static void showLifeRemainingPanel(){
+        lifeNotifyPanel.setVisible(true);
+    }
+    
+    /**
+     * helps to hide notifier bar
+     */
+    public static void hideNotifierPanel(){
+        notifierBar.setVisible(false);
+    }
+    
+    /** 
+     * helps to display notifier bar
+     */
+    public static void showNotifierPanel() {
+        notifierBar.setVisible(true);
     }
     
 }

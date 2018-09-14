@@ -54,14 +54,18 @@ public class SquareFrame extends JFrame {
     public static JPanel squareContainer() {
         return panel;
     }
-
+    
     /**
-     * * this main method will be removed from this file, it's just for testing
-     * if the grid system is working as expected...
-     *
-     * @param args
+     * helps to hide squareContainer that holds all the grid...
      */
-    public static void main(String args[]) {
-        SquareFrame mindBing = new SquareFrame();
+    public static void hideSquareContainer() {
+        panel.setVisible(false);
+    }
+    
+    /**
+     * helps to display squareContainer that holds all the grid
+     */
+    public static void showSquareContainer() {
+        panel.setVisible(true);
     }
 }
