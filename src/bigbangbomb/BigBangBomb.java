@@ -8,5 +8,4 @@ public class BigBangBomb {
     public static void main(String[] args) {
          StartPage game = new StartPage();
     }
-    
 }

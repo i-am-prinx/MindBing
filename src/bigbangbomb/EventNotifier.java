@@ -39,9 +39,9 @@ public class EventNotifier {
         
         configureShowMsgForNeutralize();
         configureShowMsgForReducedLife();
+
         
         setLife(gameLife);
-        
         setBombAroundSquare(bombAround);
         
                 
@@ -160,8 +160,7 @@ public class EventNotifier {
      */
     public static void resetBombAroundNotify(){
         bombAroundSquare.removeAll();
-    }
-    
+    }  
     
     /**
      * this is  used to hide messageForNeutralize from displaying when not needed
@@ -233,6 +232,5 @@ public class EventNotifier {
      */
     public static void showNotifierPanel() {
         notifierBar.setVisible(true);
-    }
-    
+    }  
 }

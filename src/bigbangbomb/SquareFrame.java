@@ -12,9 +12,9 @@ import net.miginfocom.swing.MigLayout;
 
 
 public class SquareFrame extends JFrame {
-
     private static JPanel panel = new JPanel();
     private static JPanel notifyBar = EventNotifier.notificationBar();
+    private static JPanel restartPage = RestartPage.getRestartPagePanel();
 
     SquareFrame() {
         super("*- Mind~Bing -*");
@@ -35,13 +35,13 @@ public class SquareFrame extends JFrame {
                 }
             }
         }
-
+        
         add(panel, BorderLayout.CENTER);
         add(notifyBar, BorderLayout.SOUTH);
+        add(restartPage, BorderLayout.NORTH);
         setVisible(true);
         pack();
         setResizable(false);
-//        setAlwaysOnTop(rootPaneCheckingEnabled);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -67,5 +67,9 @@ public class SquareFrame extends JFrame {
      */
     public static void showSquareContainer() {
         panel.setVisible(true);
+    }
+    
+    public static JPanel getRestartPage() {
+        return restartPage;
     }
 }

@@ -14,7 +14,6 @@ import java.awt.event.MouseListener;
  * @author Agbonxoft Prince
  */
 public class SquarePanel extends JPanel implements MouseListener {
-
     private boolean flag = false;
     private static int bombsAround = 0;
 
@@ -76,6 +75,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         }
         
         JPanel squareContainer = SquareFrame.squareContainer();
+        JPanel restartPage = SquareFrame.getRestartPage();
         
         /**
          * getting x and y position within the frame whenever an event happens
@@ -224,11 +224,12 @@ public class SquarePanel extends JPanel implements MouseListener {
         bombsAround = eastSquare = southSquare = northSquare = westSquare = 0;
         
          // If player's life equals Zero, then game should end
-        int endGameWithLife = Player.getGameLife();
-        if ( endGameWithLife  == 0 ){
+        int playersLife = Player.getGameLife();
+        if ( playersLife  == 0 ){
+            RestartPage.configureRestartPage();
             EventNotifier.hideNotifierPanel();
-            System.out.println("Game Over");
             SquareFrame.hideSquareContainer();
+            
         }
     }
 

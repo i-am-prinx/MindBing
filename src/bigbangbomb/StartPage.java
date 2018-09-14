@@ -1,10 +1,10 @@
 package bigbangbomb;
 
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Insets;
+import javax.swing.JLabel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -12,7 +12,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
-import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 
 
