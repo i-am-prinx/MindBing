@@ -63,6 +63,5 @@ public class SquareFrame extends JFrame {
      */
     public static void main(String args[]) {
         SquareFrame mindBing = new SquareFrame();
-//        mindBing.setSize(470, 500);     // increases the width to fit notifier text
     }
 }
