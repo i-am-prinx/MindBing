@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bigbangbomb;
 
 
@@ -74,7 +69,10 @@ public class EventNotifier {
     }
     
     
-    
+    /**
+     * this prints out message on the notifier panel whenever a user double clicks
+     * on a grid that doesn't contain a bomb.
+     */
     private static void ConfiguredShowMsgForReducedLife( ){
         SMFRL.setBackground(Color.darkGray);
         
@@ -93,9 +91,6 @@ public class EventNotifier {
      * @param bombsAround
      *    this is the amount of bomb surrounding the square where click event
      *    occur on
-     *          
-     * @param txt 
-     *    this is the text that will suffice the amount of bomb.
      */
     public static void setBombAroundSquare( int bombsAround ){
         bombAroundSquare.setLayout(new MigLayout());
@@ -115,7 +110,10 @@ public class EventNotifier {
         bombAroundSquare.add(bombAroundLabel);
     }
     
-    
+    /**
+     * This helps to set lifeRemaining of a player
+     * @param lifeRemaining ::> player's life
+     */
      public static void setLife( int lifeRemaining ){
         lifeNotifyPanel.setLayout(new MigLayout());
         lifeNotifyPanel.setBackground(Color.darkGray);
@@ -137,7 +135,20 @@ public class EventNotifier {
         lifeNotifyPanel.add(lifeNotify);
         lifeNotifyPanel.add(lifeLabel);
     }
-    
+     
+     
+     /**
+      * ( Note that when resetMethod are not called before other texts gets 
+      *  outputted to the notifierPanel, the coming text will be concatenated
+      *  to the previous text... removeMethod also be used whenever and where ever
+      *  you use setMethod )
+      */
+   
+     
+    /**
+     * For each time life is reduced we want the new player's new life to be 
+     * outputted. this method will help to remove the previous text
+     */
     public static void resetLifeRemaining( ){
         lifeNotifyPanel.removeAll();
     }
@@ -180,6 +191,20 @@ public class EventNotifier {
      */
     public static void showSMFRL(){
         SMFRL.setVisible(true);
+    }
+    
+    /**
+     * this will be used to show messageForBombs around
+     */
+    public static void showBombAround(){
+        bombAroundSquare.setVisible(true);
+    }
+    
+    /**
+     * this will be used to hide messageForBombs around
+     */
+    public static void hideBombAround(){
+        bombAroundSquare.setVisible(false);
     }
     
 }

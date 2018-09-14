@@ -44,6 +44,7 @@ public class SquarePanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         EventNotifier.resetBombAroundNotify();
         EventNotifier.resetLifeRemaining();
+        EventNotifier.hideBombAround();
         
         /***************************************************************
          * logic to display the grid color and relative notifier message
@@ -209,6 +210,7 @@ public class SquarePanel extends JPanel implements MouseListener {
             }
         } catch( Exception h ){ System.out.println("No Component found"); }
         
+        // ----- END OF ALGORITHM::: WHICH GETS BOMB AROUND  -----------------
         
         System.out.println("BA ::=== " + bombsAround );
         
@@ -217,6 +219,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         int playerLife = Player.getGameLife();
         EventNotifier.setLife(playerLife);
         EventNotifier.setBombAroundSquare(bombsAround);
+        EventNotifier.showBombAround();
         
         bombsAround = eastSquare = southSquare = northSquare = westSquare = 0;
     }
