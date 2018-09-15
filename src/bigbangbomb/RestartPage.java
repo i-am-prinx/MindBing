@@ -42,7 +42,7 @@ public class RestartPage {
         
         reasonlbl = new JLabel(reason);
         reasonlbl.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 18 ));
-        reasonlbl.setForeground(Color.magenta);
+        reasonlbl.setForeground(Color.black);
         
         restartPage.add(reasonlbl, "wrap 2");
         
@@ -96,6 +96,5 @@ public class RestartPage {
         
         restartPage.add( exitBtn, "span, push");
         restartPage.setVisible(true);
-        restartPage.setBackground(Color.DARK_GRAY);
     }
 }

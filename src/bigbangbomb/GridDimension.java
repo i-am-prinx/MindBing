@@ -36,8 +36,8 @@ public class GridDimension {
      * these are the default rows and columns which will grow simultaneously 
      * whenever they are called. their values cannot be greater than their max
      */
-    private int row = 4;
-    private int col = 4;
+    private static int row = 3;
+    private static int col = 3;
     
     
     
@@ -47,26 +47,19 @@ public class GridDimension {
      */
     private JPanel[][] nextGrid( ) {
         System.out.println("3\tnextGrid Called");
-        if ( this.row == 2 && this.col == 2 )
-        {
-            JPanel[][] grid = new JPanel[this.row][this.col];
-            grid = this.gridCreatorCalculator(grid);
-            System.out.println("7\ttested rows and columns when they have 2");
-            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
-            return grid;
-        } 
-        
-        else 
-        {
-            JPanel[][] grid = new JPanel[this.row][this.col];
-            grid = this.gridCreatorCalculator(grid);
-            System.out.println("8\ttested rows and columns when they have more than 2");
-            this.row = this.col += 2;       // ( row += 2 ) ( col += 2 )
-            return grid;
-        }
+        JPanel[][] grid = new JPanel[row][col];
+        grid = this.gridCreatorCalculator(grid);
+        System.out.println("7\ttested rows and columns when they have 2");   
+        return grid;
     }
     
-    
+    /**
+     * increases rows and columns before nextGrid is called. 
+     */
+    public static void increaseRowsNcols(){
+        row += 2;
+        col += 2;
+    }
     
     
     /**
@@ -110,5 +103,22 @@ public class GridDimension {
         }
         System.out.println("6\treturn grid after calculation");
         return p;
+    }
+    
+    /** 
+     * returns the number of rows of grids displayed
+     * @return integer
+     */
+    public static int getCurrentRow( ){
+        return row;
+    }
+    
+    /**
+     * returns the number of columns of grids displayed. computers start counting
+     * at Zero, so columns tends to always be 1 lesser than the actual amount
+     * @return integer
+     */
+    public static int getCurrentCol( ){
+        return col - 1;
     }
 }

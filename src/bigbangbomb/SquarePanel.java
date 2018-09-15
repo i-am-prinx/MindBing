@@ -62,6 +62,11 @@ public class SquarePanel extends JPanel implements MouseListener {
                 }
             }
             else if (e.getClickCount() == 2) {
+                /**
+                 * this will be worked on :::: We only want a bomb to get 
+                 * neutralized when a user right clicks, and not when he double
+                 * clicks....
+                 */
                 if (src.getComponentCount() == 1) {
                     src.setBackground(Color.blue);
                     EventNotifier.showSMFN();
@@ -240,6 +245,22 @@ public class SquarePanel extends JPanel implements MouseListener {
         if ( playersLife  == 0 ){
             gameOver("used all life");
         }
+        
+        /**
+         * ALGORITHM TO COMPUTE A SUCCESSFUL GAME ::::::
+         * 
+         * we'll have a counter that increments each time a click event occurs.
+         * thereafter we can get the amount of rows and columns that are 
+         * currently displayed, multiply the amount of rows by the number of 
+         * columns, and if the counter is up to the result gotten after the
+         * multiplication, then we can say that a user completely finished that
+         * level.
+         */
+        int displayedRows = GridDimension.getCurrentRow();
+        int displayedCols = GridDimension.getCurrentCol();
+        System.out.println("rows displayed " + displayedRows);
+        System.out.println("columns displayed " + displayedCols);
+        System.out.println("Grids displayed are " + ( displayedRows * displayedCols));
     }
 
     @Override
