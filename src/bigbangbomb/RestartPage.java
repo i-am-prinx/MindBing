@@ -1,12 +1,12 @@
 package bigbangbomb;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 public class RestartPage {
     private static JPanel restartPage = new JPanel();
     private static JButton restartBtn, homeBtn, exitBtn;
-    private static JLabel gameOverlbl;
+    private static JLabel gameOverlbl, reasonlbl;
     
     /**
      *
@@ -29,15 +29,22 @@ public class RestartPage {
     /**
      * helps to configure all components that will be displayed in the restart
      * page panel
+     * @param reason
      */
-    public static void configureRestartPage() {
+    public static void configureRestartPage(String reason) {
         restartPage.setLayout(new MigLayout());
         
         gameOverlbl = new JLabel("GAME OVER");
         gameOverlbl.setFont(new Font( Font.MONOSPACED, Font.BOLD, 60));
         gameOverlbl.setForeground(Color.red);
         
-        restartPage.add( gameOverlbl, "push, span, wrap");
+        restartPage.add( gameOverlbl, "push, span, wrap, push");
+        
+        reasonlbl = new JLabel(reason);
+        reasonlbl.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 18 ));
+        reasonlbl.setForeground(Color.magenta);
+        
+        restartPage.add(reasonlbl, "wrap 2");
         
         restartBtn = new JButton("restart");
         restartBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30 ));

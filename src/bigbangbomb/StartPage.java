@@ -123,6 +123,7 @@ public class StartPage extends JFrame implements ActionListener{
        if ( src == startGameBtn ){
            this.dispose();
            SquareFrame frame = new SquareFrame();
+           frame.setSize(550, 550);
        } 
        else if (src == helpBtn ){
            

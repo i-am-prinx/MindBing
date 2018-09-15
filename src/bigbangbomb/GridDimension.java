@@ -37,7 +37,7 @@ public class GridDimension {
      * whenever they are called. their values cannot be greater than their max
      */
     private int row = 4;
-    private int col = 8;
+    private int col = 4;
     
     
     
