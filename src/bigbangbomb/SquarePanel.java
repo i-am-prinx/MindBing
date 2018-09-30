@@ -1,5 +1,6 @@
 package bigbangbomb;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
@@ -41,6 +42,7 @@ public class SquarePanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        JPanel squareContainer = SquareFrame.squareContainer();
         /***************************************************************
          * logic to display the grid color and relative notifier message
          * so app can be user friendly
@@ -48,40 +50,43 @@ public class SquarePanel extends JPanel implements MouseListener {
         
         JPanel src = (JPanel) e.getSource();
         if (flag) {
-            long startTime = System.nanoTime();
-            if (e.getClickCount() == 1) {
-                if (src.getComponentCount() == 1) {
-                    src.setBackground(Color.red);
-                    EventNotifier.hideSMFN();
-                    EventNotifier.hideSMFRL();
-//                    gameOver("stepped on land mine");
-                } else {
-                    src.setBackground(Color.green);
-                    EventNotifier.hideSMFN();
-                    EventNotifier.hideSMFRL();
-                }
-            }
-            else if (e.getClickCount() == 2) {
-                /**
-                 * this will be worked on :::: We only want a bomb to get 
-                 * neutralized when a user right clicks, and not when he double
-                 * clicks....
-                 */
-                if (src.getComponentCount() == 1) {
-                    src.setBackground(Color.blue);
-                    EventNotifier.showSMFN();
-//                    src.removeMouseListener(this);
-                } else {
-                    Player.reduceLife();
-                    EventNotifier.showSMFRL();  
-                    // reduce player's life
+            
+            if (e.getButton() == MouseEvent.BUTTON1){
+                if (e.getClickCount() == 1) {
+                    if (src.getComponentCount() == 1) {
+                        src.setBackground(Color.red);
+                        EventNotifier.hideSMFN();
+                        EventNotifier.hideSMFRL();
+                        BigBangBomb.setSquareFrameWH(800, 600);
+                        squareContainer.setVisible(false);
+                        gameOver("stepped on land mine");
+                        SquareFrame.getRestartPage().setVisible(true);
+
+                    } else {
+                        src.setBackground(Color.green);
+                        EventNotifier.hideSMFN();
+                        EventNotifier.hideSMFRL();
+                    }
                 }
             }
             
-            long endTime = System.nanoTime();
-            System.out.println("time ----: " + (endTime - startTime));
-            if ( endTime - startTime > 9000000 ){ 
-                gameOver("stepped land mine");
+            else if (e.getButton() == MouseEvent.BUTTON3 ){
+                if (e.getClickCount() == 2) {
+                    /**
+                     * this will be worked on :::: We only want a bomb to get 
+                     * neutralized when a user right clicks, and not when he double
+                     * clicks....
+                     */
+                    if (src.getComponentCount() == 1) {
+                        src.setBackground(Color.blue);
+                        EventNotifier.showSMFN();
+    //                    src.removeMouseListener(this);
+                    } else {
+                        Player.reduceLife();
+                        EventNotifier.showSMFRL();  
+                        // reduce player's life
+                    }
+                }
             }
         }
         
@@ -90,7 +95,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         EventNotifier.resetLifeRemaining();
         EventNotifier.hideBombAround();
         
-        JPanel squareContainer = SquareFrame.squareContainer();
+        
         
         /**
          * getting x and y position within the frame whenever an event happens
@@ -243,7 +248,10 @@ public class SquarePanel extends JPanel implements MouseListener {
          // If player's life equals Zero, then game should end
         int playersLife = Player.getGameLife();
         if ( playersLife  == 0 ){
+            BigBangBomb.setSquareFrameWH(800, 600);
+            squareContainer.setVisible(false);
             gameOver("used all life");
+            SquareFrame.getRestartPage().setVisible(true);
         }
         
         /**

@@ -2,136 +2,80 @@ package bigbangbomb;
 
 
 import java.awt.Font;
-import java.awt.Color;
-import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
-import net.miginfocom.swing.MigLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
 
 
-
-/**
- *
- * @author Agbonxoft Prince
- */
-public class StartPage extends JFrame implements ActionListener{
-    private static JPanel box;
-    private static JLabel gameName;
-    private static JPanel gameTitle = new JPanel();
-    private static JButton startGameBtn, exitGameBtn, helpBtn;
-    private static GridBagConstraints grid = new GridBagConstraints();
+public class StartPage {
+    private static JButton startBtn, exitBtn, helpBtn;
+    private static JPanel startPagePanel, squaresContainer, square;
+    private static JPanel notifyBar;
+    private static GridBagConstraints grid;
     
-    StartPage(){
-        super("*- Mind~Bing -*");
-        setLayout(new GridBagLayout());
+    public static JPanel configureStartPagePanel( ) {
+        startPagePanel = new JPanel( );
+        startPagePanel.setLayout(new GridBagLayout());
+        grid = new GridBagConstraints();
         
-        gameTitle.setLayout(new MigLayout());
-        gameName = new JLabel("Mind Bing");
-        gameName.setFont(new Font(Font.MONOSPACED, Font.BOLD, 40));
-        gameName.setForeground(Color.BLUE);
-        gameName.setBounds(10, 10, 10, 10);
-        
-        box = new JPanel();
-        box.setSize(250, 50);
-        box.setBounds(25, 25, 25, 25);
-        box.setBackground(Color.RED);
-        
-        gameTitle.add( box, "push");
-        
-        gameTitle.add(gameName, "push");
-        
-        box = new JPanel();
-        box.setSize(250, 50);
-        box.setBounds(25, 25, 25, 25);
-        box.setBackground(Color.GREEN);
-        gameTitle.add( box, "push" );
-        
-        
+        startBtn = new JButton("start game");
+        startBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        startBtn.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         grid.gridx = 0;
         grid.gridy = 0;
-        grid.insets = new Insets(5, 5, 5, 5);
-        grid.ipadx = 5;
-        grid.ipady = 5;
+        grid.insets = new Insets( 3, 3, 3, 3);
+        startPagePanel.add(startBtn, grid);
         
-        add(gameTitle, grid);
-        
-        
-        startGameBtn = new JButton("start");
-        startGameBtn.setFont(new Font( Font.MONOSPACED, Font.BOLD, 20));
-        startGameBtn.setBackground(Color.DARK_GRAY);
-        startGameBtn.setForeground(Color.lightGray);
-        
+        helpBtn = new JButton("instructions");
+        helpBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        helpBtn.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         grid.gridx = 0;
         grid.gridy = 1;
-        grid.insets = new Insets(5, 5, 5, 5);
-        grid.ipadx = 5;
-        grid.ipady = 5;
+        grid.insets = new Insets( 3, 3, 3, 3);
+        startPagePanel.add(helpBtn, grid);
         
-        add(startGameBtn, grid);
-        
-        
-        helpBtn = new JButton("help");
-        helpBtn.setFont(new Font( Font.MONOSPACED, Font.BOLD, 20));
-        helpBtn.setBackground(Color.darkGray);
-        helpBtn.setForeground(Color.lightGray);
-        
+        exitBtn = new JButton("exit game");
+        exitBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        exitBtn.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         grid.gridx = 0;
         grid.gridy = 2;
-        grid.insets = new Insets(5, 5, 5, 5);
-        grid.ipadx = 5;
-        grid.ipady = 5;
-        
-        add(helpBtn, grid);
-        
-        
-        exitGameBtn = new JButton("exit");
-        exitGameBtn.setFont(new Font( Font.MONOSPACED, Font.BOLD, 20));
-        exitGameBtn.setBackground(Color.darkGray);
-        exitGameBtn.setForeground(Color.lightGray);
-        
-        grid.gridx = 0;
-        grid.gridy = 3;
-        grid.insets = new Insets(5, 5, 5, 5);
-        grid.ipadx = 5;
-        grid.ipady = 5;
-        
-        add(exitGameBtn, grid);
-        
-        
-        startGameBtn.addActionListener(this);
-        exitGameBtn.addActionListener(this);
-        helpBtn.addActionListener( this );
+        grid.insets = new Insets( 3, 3, 3, 3);
+        startPagePanel.add(exitBtn, grid);
         
         
         
-        pack();
-        setVisible(true);
-        this.setSize(400, 340);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        startBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e ) {
+                startPagePanel.setVisible(false);
+                squaresContainer = SquareFrame.squareContainer();
+                squaresContainer.setVisible(true);
+                notifyBar = SquareFrame.getNotifyBar();
+                notifyBar.setVisible(true);
+                BigBangBomb.packSquareFrame();
+            }
+        });
+        
+        helpBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e ) {
+                
+            }
+        });
+        
+        exitBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e ) {
+                
+            }
+        });
+        
+        
+        return startPagePanel;
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       JButton src = (JButton) e.getSource();
-       if ( src == startGameBtn ){
-           this.dispose();
-           SquareFrame frame = new SquareFrame();
-           frame.setSize(550, 550);
-       } 
-       else if (src == helpBtn ){
-           
-       }
-       else if ( src == exitGameBtn ){
-           this.dispose();
-           System.exit(0);
-       }
-    }
-    
+
 }

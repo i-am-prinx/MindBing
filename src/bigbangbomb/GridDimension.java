@@ -36,8 +36,8 @@ public class GridDimension {
      * these are the default rows and columns which will grow simultaneously 
      * whenever they are called. their values cannot be greater than their max
      */
-    private static int row = 3;
-    private static int col = 3;
+    private static int row = 4;
+    private static int col = 4;
     
     
     

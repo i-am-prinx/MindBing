@@ -1,75 +1,85 @@
 package bigbangbomb;
 
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
-/**
- *
- * @author Agbonxoft Prince
- */
-
 
 public class SquareFrame extends JFrame {
-    private static JPanel panel = new JPanel();
+    private static JPanel gamePanel, squaresContainer, square, layerOne, layerTwo;
+    private static JPanel startPagePanel = StartPage.configureStartPagePanel();
     private static JPanel notifyBar = EventNotifier.notificationBar();
-    private static JPanel restartPage = RestartPage.getRestartPagePanel();
-
-    SquareFrame() {
-        super("*- Mind~Bing -*");
+    private static JPanel restartPagePanel = RestartPage.getRestartPagePanel();
+    
+    
+    SquareFrame( ) {
+        super("*-Mind Bing-*");
         setLayout(new BorderLayout());
-
-        JPanel[][] fp = new GridDimension().callNextGrid();
-
-        panel.setLayout(new MigLayout());
-
-        for (int i = 0; i < fp.length; i++) {
-            for (int j = fp[i].length - 1; j > 0; j--) {
-                if (j == 1) {
-                    System.out.print("#  \n");
-                    panel.add(fp[i][j], "width 30:80:80, height 30:80:80, wrap");
-                } else {
-                    System.out.print("#  ");
-                    panel.add(fp[i][j], "width 30:80:80, height 30:80:80");
-                }
-            }
-        }
         
-        add(panel, BorderLayout.CENTER);
+        configureGameSquares( );
+        
+        square.setVisible(false);
+        restartPagePanel.setVisible(false);
+        notifyBar.setVisible(false);
+        
+        
+        add(restartPagePanel, BorderLayout.NORTH);
+        add(square, BorderLayout.CENTER);
         add(notifyBar, BorderLayout.SOUTH);
-        add(restartPage, BorderLayout.NORTH);
+        add(startPagePanel, BorderLayout.WEST);
         setVisible(true);
+
         pack();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    /**
-     * this is returned so it's attributes can be used in other class files
-     * attributes like ( width and height )
-     *
-     * @return JPanel
-     */
-    public static JPanel squareContainer() {
-        return panel;
+    
+    
+    private static void configureGameSquares( ) {
+        square = new JPanel( );
+        square.setLayout(new MigLayout( ));
+        
+        JPanel[][] fp = new GridDimension().callNextGrid();
+        
+        for (int i = 0; i < fp.length; i++) {
+            for (int j = fp[i].length - 1; j > 0; j--) {
+                if (j == 1) {
+                    System.out.print("#  \n");
+                    square.add(fp[i][j], "width 30:80:80, height 30:80:80, wrap");
+                } else {
+                    System.out.print("#  ");
+                    square.add(fp[i][j], "width 30:80:80, height 30:80:80");
+                }
+            }
+        }
     }
     
-    /**
-     * helps to hide squareContainer that holds all the grid...
-     */
-    public static void hideSquareContainer() {
-        panel.setVisible(false);
+    public static JPanel squareContainer( ){
+        return square;
     }
     
-    /**
-     * helps to display squareContainer that holds all the grid
-     */
-    public static void showSquareContainer() {
-        panel.setVisible(true);
+    public static JPanel getGamePanel( ) {
+        return gamePanel;
+    }
+    
+    public static void hideSquareContainer( ) {
+        square.setVisible(false);
+    }
+    
+    public static void showSquareContainer( ) {
+        square.setVisible(true);
     }
     
     public static JPanel getRestartPage() {
-        return restartPage;
+        return restartPagePanel;
+    }
+    
+    public static JPanel getNotifyBar( ) {
+        return notifyBar;
+    }
+    
+    public static JPanel getStartPagePanel( ) {
+        return startPagePanel;
     }
 }

@@ -12,7 +12,10 @@ import net.miginfocom.swing.MigLayout;
 /**
  *
  * @author Agbonxoft Prince
+ * 
  */
+
+
 public class RestartPage {
     private static JPanel restartPage = new JPanel();
     private static JButton restartBtn, homeBtn, exitBtn;
@@ -73,8 +76,7 @@ public class RestartPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-            }
-            
+            }  
         });
         
         
@@ -82,15 +84,16 @@ public class RestartPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
-            }
-            
+            }      
         });
         
         
         homeBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-
+               restartPage.setVisible(false);
+               SquareFrame.getStartPagePanel().setVisible(true);
+               BigBangBomb.packSquareFrame();
             }
         });
         
