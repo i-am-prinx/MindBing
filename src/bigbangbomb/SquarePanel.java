@@ -113,11 +113,17 @@ public class SquarePanel extends JPanel implements MouseListener {
          * when he neutralizes a bomb
          */
         if ( gridGotten == numberOfGrid ) {
-            System.out.println("\n\n\n\n\n\nInside of level complete logic");
-            squareContainer.setVisible(false);
-            EventNotifier.hideNotifierPanel();            
-            SquareFrame.configureLevelCompletePanel();
-            BigBangBomb.packSquareFrame();
+            gridGotten = 0;             // reset grid gotten to 0
+            Player.resetGameLife();     // reset game life to initial
+            
+            // remove the previous level complete component else coming will be 
+            // displayed along side previous components
+            SquareFrame.getlevelCompletePanel().removeAll();    
+            System.out.println("\n\n\n\n\n\nInside of level complete logic");   // just for testing
+            squareContainer.setVisible(false);      // hide container holding grids
+            EventNotifier.hideNotifierPanel();      // hide notification bar      
+            SquareFrame.configureLevelCompletePanel();  // reconfigure level complete( that we reset above )
+            BigBangBomb.packSquareFrame();          // allow frame to fit to container of the level complete panel
         }
 
         EventNotifier.resetBombAroundNotify();

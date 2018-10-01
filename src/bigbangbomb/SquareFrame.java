@@ -29,8 +29,8 @@ public class SquareFrame extends JFrame {
     SquareFrame() {
         super("*-Mind Bing-*");
         setLayout(new BorderLayout());
-        
-        levelCompletePanel = new JPanel( );
+
+        levelCompletePanel = new JPanel();
         levelCompletePanel.setVisible(false);
 
         EventNotifier.configureNotificationBar();
@@ -76,26 +76,25 @@ public class SquareFrame extends JFrame {
             }
         }
     }
-    
+
     /**
      * this configures level complete panel
      */
-    public static void configureLevelCompletePanel( ) {
-        levelCompletePanel.setLayout(new MigLayout( ));
+    public static void configureLevelCompletePanel() {
+        levelCompletePanel.setLayout(new MigLayout());
         levelCompletePanel.setVisible(true);
         String[] completeChar = {
             "l", "e", "v", "e", "l", "  ",
             "c", "o", "m", "p", "l", "e", "t", "e"
         };
-        
+
         // panel to hold level complete label
-        JPanel completePanel = new JPanel( );
-        completePanel.setLayout(new MigLayout( ));
-        
-        
+        JPanel completePanel = new JPanel();
+        completePanel.setLayout(new MigLayout());
+
         /**
-         * this will increment the grid row and column before displaying the 
-         * grid squareContainer holding and displaying the incremented values 
+         * this will increment the grid row and column before displaying the
+         * grid squareContainer holding and displaying the incremented values
          * for rows and column
          */
         JButton nextLevelBtn = new JButton("next level");
@@ -104,27 +103,48 @@ public class SquareFrame extends JFrame {
         nextLevelBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         nextLevelBtn.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
         nextLevelBtn.setBounds(5, 5, 5, 5);
-        
-        nextLevelBtn.addActionListener(new ActionListener(){
-            public void actionPerformed( ActionEvent e ){
-                GridDimension.increaseRowsNcols( );
+
+        nextLevelBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                levelCompletePanel.setVisible(false);   // hide level complete panel
+                GridDimension.increaseRowsNcols();      // increase grid dimension
+                
+                /**
+                 * reset bombs around from previous play 
+                 */
+                EventNotifier.resetLifeRemaining();
+                EventNotifier.resetBombAroundNotify();
+                EventNotifier.setLife(Player.getGameLife());
+                EventNotifier.setBombAroundSquare(0);
+
+                // get the grid container & remove all of it's component
+                squareContainer().removeAll();
+                EventNotifier.hideSMFN();       // hide bomb neutralized message
+                EventNotifier.hideSMFRL();      // hide life reduced message
+
+                // reconfigure the grid container and display it
+                getConfigureGameSquares();
+                squareContainer().setVisible(true);
+                getNotifyBar().setVisible(true);
+
+                BigBangBomb.packSquareFrame();
             }
         });
-        
+
         /**
          * configuring home button... this button will act like the button in
          * restart page. it will trigger the display of the start page.
          */
-        
         JButton homeBtn = new JButton("home");
         homeBtn.setBackground(Color.DARK_GRAY);
         homeBtn.setForeground(Color.WHITE);
         homeBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         homeBtn.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
         homeBtn.setBounds(5, 5, 5, 5);
-        
-        homeBtn.addActionListener(new ActionListener( ){
-            public void actionPerformed( ActionEvent e ){
+
+        homeBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 Player.resetGameLife();   // helps to reset game life to initial
                 RestartPage.homeBtnConfiguration(); // returns to the start page
                 EventNotifier.hideSMFN();       // hide bomb neutralized message
@@ -133,20 +153,18 @@ public class SquareFrame extends JFrame {
                 BigBangBomb.packSquareFrame();  // main frame should take the size of panel
             }
         });
-        
-        
-        
+
         JLabel eachCharlbl;
-        
-        for (int i = 0; i < completeChar.length; i++ ){
+
+        for (int i = 0; i < completeChar.length; i++) {
             String letter = completeChar[i];
-            eachCharlbl = new JLabel( letter );
+            eachCharlbl = new JLabel(letter);
             eachCharlbl.setFont(new Font(Font.MONOSPACED, Font.BOLD, 32));
             eachCharlbl.setForeground(Color.MAGENTA);
-            
+
             /**
              * this is to make a little pause before display, so it will look
-             * like an animation. 
+             * like an animation.
              */
 //            try{
 //                Thread.sleep(100);
@@ -157,7 +175,7 @@ public class SquareFrame extends JFrame {
             completePanel.add(eachCharlbl, "push");
             System.out.println(i);
         }
-        
+
         /**
          * adding buttons and message label to level complete panel
          */
@@ -165,13 +183,13 @@ public class SquareFrame extends JFrame {
         levelCompletePanel.add(nextLevelBtn, "push 2");
         levelCompletePanel.add(homeBtn, "push");
     }
-    
+
     /**
      * allows other classes to be able to use levelCompletePanel
-     * @return JPanel
-     *      returning actual levelCompletePanel that is added to frame
+     *
+     * @return JPanel returning actual levelCompletePanel that is added to frame
      */
-    public static JPanel getlevelCompletePanel( ) {
+    public static JPanel getlevelCompletePanel() {
         return levelCompletePanel;
     }
 
