@@ -1,6 +1,5 @@
 package bigbangbomb;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
@@ -57,8 +56,14 @@ public class SquarePanel extends JPanel implements MouseListener {
                         src.setBackground(Color.red);
                         EventNotifier.hideSMFN();
                         EventNotifier.hideSMFRL();
+                        // set the size of the frame to 800x600 so our restart
+                        // page can every of it's component
                         BigBangBomb.setSquareFrameWH(800, 600);
+                        // since we want to show restart page, we have to hide
+                        // square Container
                         squareContainer.setVisible(false);
+                        // reveal restart page
+                        SquareFrame.getRestartPage().removeAll( );
                         gameOver("stepped on land mine");
                         SquareFrame.getRestartPage().setVisible(true);
 
@@ -250,6 +255,7 @@ public class SquarePanel extends JPanel implements MouseListener {
         if ( playersLife  == 0 ){
             BigBangBomb.setSquareFrameWH(800, 600);
             squareContainer.setVisible(false);
+            SquareFrame.getRestartPage().removeAll( );
             gameOver("used all life");
             SquareFrame.getRestartPage().setVisible(true);
         }
@@ -296,13 +302,20 @@ public class SquarePanel extends JPanel implements MouseListener {
     }
     
     /**
-     * game over implementation... this is to avoid redundancy
+     * game over implementation... this is to avoid redundancy and to reset every
+     * values used in previous game play.
      * @param str 
      *      this tells the reason why game ends
      */
     private static void gameOver( String str ) {
-        RestartPage.configureRestartPage(str);
-        EventNotifier.hideNotifierPanel();
-        SquareFrame.hideSquareContainer();
+        Player.resetGameLife();     // resetting the game life to initial value
+        RestartPage.configureRestartPage(str);  // displays why game ends
+        EventNotifier.resetBombAroundNotify();  // remove previous value of bombaround
+        EventNotifier.resetLifeRemaining();     // remove previous value of life
+        EventNotifier.hideSMFN();               // hide bomb neutralized message
+        EventNotifier.hideSMFRL();              // hide life reduced message
+        EventNotifier.hideNotifierPanel();      // hide the notifier panel
+        SquareFrame.hideSquareContainer();      // hide square container holding grid
+        SquareFrame.squareContainer().removeAll( ); // remove all of the grids
     }
 }

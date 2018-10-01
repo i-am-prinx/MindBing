@@ -63,6 +63,13 @@ public class Player {
         return gameLife;
     }
     
+    /**
+     * this resets the game life to the initial value
+     */
+    public static void resetGameLife( ) {
+        gameLife = 5;
+    }
+    
     
     
     /**

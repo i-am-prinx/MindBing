@@ -21,19 +21,25 @@ public class EventNotifier {
     private static JPanel lifeNotifyPanel = new JPanel();
     private static JPanel bombAroundSquare = new JPanel();
     private static int bombAround = SquarePanel.getBombAround();
-    private static JPanel notifierBar = new JPanel();
+    private static JPanel notifierBar;
     private static JLabel lifeLabel, lifeNotify, bombAroundLabel, bombAroundNotify;
     
     
     //******************** Show Message For Neutralize( SMFN )
     //*************** Show Message For Reduced Life ( SMFRL )
     
+    
+    
+    public static JPanel getNotificationBar( ) {
+        return notifierBar;
+    }
     /**
      * will be displayed before after grid is displayed on the game window
      * which will hold users remaining life and events that happens when 
      * click event is performed on a square.
      */
-    public static JPanel notificationBar(){
+    public static void configureNotificationBar(){
+        notifierBar = new JPanel( );
         notifierBar.setLayout(new MigLayout());
         notifierBar.setBackground(Color.darkGray);
         
@@ -50,7 +56,7 @@ public class EventNotifier {
         notifierBar.add(lifeNotifyPanel, "wrap" );
         notifierBar.add(SMFN);
         notifierBar.add(SMFRL, "wrap");
-        return notifierBar;
+//        return notifierBar;
     } 
     
     /**
