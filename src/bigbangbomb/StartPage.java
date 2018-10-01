@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 public class StartPage {
 
@@ -87,7 +88,26 @@ public class StartPage {
 
         helpBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                String message = ("MIND BING\n\n"
+                        + "Sets of grid are displayed, some are containing a bomb"
+                        + " and others are not. A user is expected to select all grids"
+                        + "\n\nRULES\n\n"
+                        + "Grids containing bombs should be right clicked twice\n"
+                        + "When a grid not containing a bomb is right clicked twice, there"
+                        + " will be a reduction in the players life\n"
+                        + "Grids not containing bomb should be left clicked once\n\n"
+                        + "NOTE\n\n"
+                        + "When a player right clicks ( twice ) a grid containing a bomb, the"
+                        + "bomb will be neutralized, there will be no need for such grid to\n"
+                        + "be clicked again\n"
+                        + "When a player clicks on a grid not containing a bomb, and when"
+                        + " a player neutralizes a bomb, grids surrounding the previously\n"
+                        + "clicked grid will be checked for bombs, if bomb is found, it will"
+                        + " be calculated and displayed in the notification bar.\n"
+                        + "Players current life is also displayed in the notification bar.");
+                JOptionPane.showMessageDialog(
+                        null, message, "Instructions", JOptionPane.INFORMATION_MESSAGE
+                );
             }
         });
 
