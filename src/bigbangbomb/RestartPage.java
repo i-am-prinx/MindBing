@@ -94,18 +94,18 @@ public class RestartPage {
                  */
                 int life = Player.getGameLife();
                 restartPage.setVisible(false);
-                
+
                 /**
-                 * code below will help to reset bombs around and life remaining.
-                 * this is because we are starting a new game. so the figures 
-                 * need to be changed to their initial value.
+                 * code below will help to reset bombs around and life
+                 * remaining. this is because we are starting a new game. so the
+                 * figures need to be changed to their initial value.
                  */
                 EventNotifier.resetLifeRemaining();
                 EventNotifier.resetBombAroundNotify();
                 EventNotifier.setLife(life);
                 EventNotifier.setBombAroundSquare(0);
                 EventNotifier.hideNotifierPanel();
-                
+
                 // displaying the start page panel and making sure the frame 
                 // takes the size if the panel.
                 SquareFrame.getStartPagePanel().setVisible(true);
