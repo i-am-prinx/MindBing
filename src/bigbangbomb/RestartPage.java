@@ -87,33 +87,42 @@ public class RestartPage {
         homeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /**
-                 * when home button that is displayed within restart page is
-                 * clicked we want restart page to be hidden and start page (
-                 * which is representing the home page ) to be displayed
-                 */
-                int life = Player.getGameLife();
-                restartPage.setVisible(false);
-
-                /**
-                 * code below will help to reset bombs around and life
-                 * remaining. this is because we are starting a new game. so the
-                 * figures need to be changed to their initial value.
-                 */
-                EventNotifier.resetLifeRemaining();
-                EventNotifier.resetBombAroundNotify();
-                EventNotifier.setLife(life);
-                EventNotifier.setBombAroundSquare(0);
-                EventNotifier.hideNotifierPanel();
-
-                // displaying the start page panel and making sure the frame 
-                // takes the size if the panel.
-                SquareFrame.getStartPagePanel().setVisible(true);
-                BigBangBomb.packSquareFrame();
+               homeBtnConfiguration();
             }
         });
 
         restartPage.add(exitBtn, "span, push");
         restartPage.setVisible(true);
+    }
+
+    /**
+     * home buttons are used in several panel, instead of writing this same 
+     * configuration for every of the home button we have in the application
+     * it is best if one configuration can be shared amongst others.
+     */
+    public static void homeBtnConfiguration() {
+        /**
+         * when home button that is displayed within restart page is clicked we
+         * want restart page to be hidden and start page ( which is representing
+         * the home page ) to be displayed
+         */
+        int life = Player.getGameLife();
+        restartPage.setVisible(false);
+
+        /**
+         * code below will help to reset bombs around and life remaining. this
+         * is because we are starting a new game. so the figures need to be
+         * changed to their initial value.
+         */
+        EventNotifier.resetLifeRemaining();
+        EventNotifier.resetBombAroundNotify();
+        EventNotifier.setLife(life);
+        EventNotifier.setBombAroundSquare(0);
+        EventNotifier.hideNotifierPanel();
+
+        // displaying the start page panel and making sure the frame 
+        // takes the size if the panel.
+        SquareFrame.getStartPagePanel().setVisible(true);
+        BigBangBomb.packSquareFrame();
     }
 }

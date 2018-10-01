@@ -17,6 +17,7 @@ public class SquarePanel extends JPanel implements MouseListener {
 
     private boolean flag = false;
     private static int bombsAround = 0;
+    private static int gridGotten = 0;
 
     SquarePanel() {
         super();
@@ -43,12 +44,14 @@ public class SquarePanel extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JPanel squareContainer = SquareFrame.squareContainer();
+        int numberOfGrid = squareContainer.getComponentCount();
+        System.out.println("Number of components: " + numberOfGrid );
         /**
          * *************************************************************
          * logic to display the grid color and relative notifier message so app
          * can be user friendly
          */
-
+        
         JPanel src = (JPanel) e.getSource();
         if (flag) {
 
@@ -73,6 +76,10 @@ public class SquarePanel extends JPanel implements MouseListener {
                         src.setBackground(Color.green);
                         EventNotifier.hideSMFN();
                         EventNotifier.hideSMFRL();
+                        
+                        // if a user turns a square that there is no bomb, 
+                        // increment grid gotten 
+                        gridGotten += 1;
                     }
                 }
             } else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -85,7 +92,9 @@ public class SquarePanel extends JPanel implements MouseListener {
                     if (src.getComponentCount() == 1) {
                         src.setBackground(Color.blue);
                         EventNotifier.showSMFN();
-                        //                    src.removeMouseListener(this);
+                        // when a user neutralizes a grid by right clicking twice
+                        // in a grid containing a bomb increment gridGotten by 1
+                        gridGotten += 1;
                     } else {
                         Player.reduceLife();
                         EventNotifier.showSMFRL();
@@ -93,6 +102,22 @@ public class SquarePanel extends JPanel implements MouseListener {
                     }
                 }
             }
+        }
+        
+        /**
+         * when the amount of grids a user has gotten equals the amount of grids
+         * displayed without a user stepping on a bomb, then the user completes
+         * that level
+         * 
+         * a user get grid when he turns a grid that doesn't contain a bomb or 
+         * when he neutralizes a bomb
+         */
+        if ( gridGotten == numberOfGrid ) {
+            System.out.println("\n\n\n\n\n\nInside of level complete logic");
+            squareContainer.setVisible(false);
+            EventNotifier.hideNotifierPanel();            
+            SquareFrame.configureLevelCompletePanel();
+            BigBangBomb.packSquareFrame();
         }
 
         EventNotifier.resetBombAroundNotify();
@@ -314,5 +339,6 @@ public class SquarePanel extends JPanel implements MouseListener {
         EventNotifier.hideNotifierPanel();      // hide the notifier panel
         SquareFrame.hideSquareContainer();      // hide square container holding grid
         SquareFrame.squareContainer().removeAll(); // remove all of the grids
+        gridGotten = 0;                         // reset gotten grid to 0
     }
 }
