@@ -17,7 +17,7 @@ import net.miginfocom.swing.MigLayout;
 public class RestartPage {
 
     private static JPanel restartPage = new JPanel();
-    private static JButton restartBtn, homeBtn, exitBtn;
+    private static JButton replayBtn, homeBtn, exitBtn;
     private static JLabel gameOverlbl, reasonlbl;
 
     /**
@@ -50,12 +50,12 @@ public class RestartPage {
 
         restartPage.add(reasonlbl, "wrap 2");
 
-        restartBtn = new JButton("restart");
-        restartBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
-        restartBtn.setBackground(Color.darkGray);
-        restartBtn.setForeground(Color.green);
+        replayBtn = new JButton("replay");
+        replayBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        replayBtn.setBackground(Color.darkGray);
+        replayBtn.setForeground(Color.green);
 
-        restartPage.add(restartBtn, "push");
+        restartPage.add(replayBtn, "push");
 
         homeBtn = new JButton("home");
         homeBtn.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
@@ -69,10 +69,20 @@ public class RestartPage {
         exitBtn.setBackground(Color.darkGray);
         exitBtn.setForeground(Color.green);
 
-        restartBtn.addActionListener(new ActionListener() {
+        replayBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                restartPage.setVisible(false);
 
+                // get the grid container & remove all of it's component
+                SquareFrame.squareContainer().removeAll();
+
+                // reconfigure the grid container and display it
+                SquareFrame.getConfigureGameSquares();
+                SquareFrame.squareContainer().setVisible(true);
+                SquareFrame.getNotifyBar().setVisible(true);
+
+                BigBangBomb.packSquareFrame();
             }
         });
 
